@@ -34,11 +34,11 @@ assembleDebug:
   stage: build
   script:
     - ./build_scripts/publish.sh
-  artifacts:
-    paths:
-      - artifacts/
+#  artifacts:
+#    paths:
+#      - artifacts/
 
-debugTests:
-  stage: test
-  script:
-    - ./gradlew -Pci --console=plain :testDebug
+#debugTests:
+#  stage: test
+#  script:
+#    - ./gradlew -Pci --console=plain :testDebug
