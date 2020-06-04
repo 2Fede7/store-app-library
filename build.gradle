@@ -85,7 +85,11 @@ android {
             repositories {
                 maven {
                     name 'internal'
-                    url 'http://172.16.20.240:8080/artifactory/libs-release-local'
+                    url "${ARTIFACTORY_URL}/${MAVEN_REPO_KEY}"
+                    credentials {               // Optional resolver credentials (leave out to use anonymous resolution)
+                        username = "${ARTIFACTORY_USER}" // Artifactory user name
+                        password = "${ARTIFACTORY_PASS}" // Password or API Key
+                    }
                 }
             }
         }
