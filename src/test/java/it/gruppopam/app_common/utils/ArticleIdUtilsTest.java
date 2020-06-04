@@ -21,7 +21,7 @@ public class ArticleIdUtilsTest {
 
     @Test
     public void shouldExtractArticleId() {
-        long articleId = articleIdUtils.extractArticleId("22218040");
+        long articleId = articleIdUtils.extractArticleId("22218049");
         assertThat(articleId, is(2218049L));
     }
 
