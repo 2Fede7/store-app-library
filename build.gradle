@@ -34,6 +34,7 @@ allprojects {
     }
 }
 
+
 apply plugin: 'com.android.library'
 
 android {
@@ -59,6 +60,35 @@ android {
 
     lintOptions {
         abortOnError false
+    }
+
+    libraryVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = rootProject.file("artifacts/store-app-library-${version}-${variant.name}.aar")
+        }
+
+    }
+
+    afterEvaluate {
+        apply plugin: 'maven-publish'
+
+
+        publishing {
+            publications {
+                // Creates a Maven publication called "release".
+                release(MavenPublication) {
+                    // Applies the component for the release build variant.
+                    artifact("artifacts/store-app-library-${version}-release.aar")
+                }
+            }
+
+            repositories {
+                maven {
+                    name 'internal'
+                    url 'http://172.16.20.240:8080/artifactory/libs-release-local'
+                }
+            }
+        }
     }
 }
 
