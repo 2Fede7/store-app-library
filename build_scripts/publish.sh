@@ -1,3 +1,3 @@
 #!/bin/bash -el
 
-./gradlew clean assemble artifactoryPublish --info
+./gradlew clean build generatePomFileForMavenPublication artifactoryPublish --info
