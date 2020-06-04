@@ -83,18 +83,6 @@ android {
                 }
             }
 
-            repositories {
-                /*maven {
-                    name 'internal'
-                    url System.getenv("ARTIFACTORY_URL") + "/" + System.getenv("MAVEN_REPO_KEY")
-                    credentials {               // Optional resolver credentials (leave out to use anonymous resolution)
-                        username = System.getenv("ARTIFACTORY_USER") // Artifactory user name
-                        password = System.getenv("ARTIFACTORY_PASS") // Password or API Key
-                    }
-                }*/
-
-            }
-
             artifactory {
                 publish {
                     contextUrl = System.getenv("ARTIFACTORY_URL")
