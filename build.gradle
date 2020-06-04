@@ -100,7 +100,6 @@ android {
                         publishIvy = true   //Publish generated Ivy descriptor files to Artifactory (true by default).
                     }
                 }
-
             }
         }
     }
