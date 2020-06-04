@@ -99,7 +99,6 @@ android {
 
         artifactory {
             publish {
-                /*
                 contextUrl = System.getenv("ARTIFACTORY_URL")
                 repository {
                     repoKey = System.getenv("MAVEN_REPO_KEY") //The Artifactory repository key to publish to
@@ -107,14 +106,7 @@ android {
                     username = System.getenv("ARTIFACTORY_USER")          //The publisher user name
                     password = System.getenv("ARTIFACTORY_PASS")
                 }
-                */
-                contextUrl = "http://y-artifactory.dnspam:8080/artifactory"
-                repository {
-                    repoKey = "libs-release-local" //The Artifactory repository key to publish to
 
-                    username = "pam"          //The publisher user name
-                    password = "Pam2011!"
-                }
                 defaults {
                     publications ('aar')
                     publishBuildInfo = true   //Publish build-info to Artifactory (true by default)
