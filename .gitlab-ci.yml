@@ -32,6 +32,8 @@ before_script:
 
 deployRelease:
   stage: deploy
+  only:
+    - master
   script:
     - ./build_scripts/publish.sh
 #  artifacts:

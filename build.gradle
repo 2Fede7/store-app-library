@@ -1,4 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+group = 'it.gruppopam.android'
+version = '1.0'
+description = 'Android library for store apps'
 
 buildscript {
 
@@ -21,6 +24,12 @@ buildscript {
     }
 }
 
+configurations {
+    generic {
+        description = 'generic'
+    }
+}
+
 allprojects {
     repositories {
         mavenLocal()
@@ -30,10 +39,29 @@ allprojects {
             url 'https://maven.google.com/'
             name 'Google'
         }
-
     }
 }
 
+def libraryVersionAlreadyExistes = true;
+
+task resolveCompileSources {
+    doLast {
+        try {
+            def componentIds = configurations.getByName("generic").incoming.resolutionResult.allDependencies.collect { it.selected.id }
+
+            libraryVersionAlreadyExistes = true;
+            println "Library version already exists!"
+        } catch (Exception e) {
+            libraryVersionAlreadyExistes = false;
+            println "Library not exists"
+        }
+    }
+}
+
+task copyDependencies(type: Copy) {
+    from configurations.getByName("generic")
+    into "resolved"
+}
 
 apply plugin: 'com.android.library'
 apply plugin: "com.jfrog.artifactory"
@@ -81,6 +109,7 @@ android {
         artifactoryPublish.skip = true
 
         publishing {
+            artifactoryPublish.dependsOn('resolveCompileSources')
             artifactoryPublish.dependsOn('assembleRelease')
             artifactoryPublish.dependsOn('generatePomFileForAarPublication')
 
@@ -94,6 +123,10 @@ android {
         }
 
         artifactoryPublish {
+            doFirst {
+                if (libraryVersionAlreadyExistes)
+                    throw new GradleException("Library version already exists!")
+            }
             publications(publishing.publications.aar)
         }
 
@@ -121,10 +154,6 @@ android {
 
 apply plugin: 'maven'
 
-group = 'it.gruppopam.android'
-version = '1.0'
-description = 'Android library for store apps'
-
 uploadArchives {
     repositories {
         mavenDeployer {
@@ -136,3 +165,7 @@ uploadArchives {
 uploadArchives.dependsOn(build)
 
 apply from: 'dependencies.gradle'
+
+dependencies {
+    generic "it.gruppopam.android:${rootProject.name}:${version}"
+}
