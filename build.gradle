@@ -47,7 +47,7 @@ def libraryVersionAlreadyExistes = true;
 task resolveCompileSources {
     doLast {
         try {
-            def componentIds = configurations.getByName("generic").incoming.resolutionResult.allDependencies.collect { it.selected.id }
+            configurations.getByName("generic").incoming.resolutionResult.allDependencies.collect { it.selected.id }
 
             libraryVersionAlreadyExistes = true;
             println "Library version already exists!"
@@ -56,11 +56,6 @@ task resolveCompileSources {
             println "Library not exists"
         }
     }
-}
-
-task copyDependencies(type: Copy) {
-    from configurations.getByName("generic")
-    into "resolved"
 }
 
 apply plugin: 'com.android.library'
@@ -123,10 +118,10 @@ android {
         }
 
         artifactoryPublish {
-            doFirst {
+            /*doFirst {
                 if (libraryVersionAlreadyExistes)
                     throw new GradleException("Library version already exists!")
-            }
+            }*/
             publications(publishing.publications.aar)
         }
 
