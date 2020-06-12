@@ -25,7 +25,12 @@ public final class BarcodeUtils {
 
     public static boolean isEan8Pam(String searchString) {
         Long barcode = Long.valueOf(searchString);
-        return barcode >= 22000000 && barcode < 30000000;
+        return barcode >= 20000000 && barcode < 30000000;
+    }
+
+    public static boolean isNormalizeEan8Pam(String searchString) {
+        return searchString.substring(0, 6).equals("000002")
+                && searchString.length() == AppConstants.ARTICLE_ID_BARCODE_LENGTH_13;
     }
 
     public static String leftPad13(String barcode) {

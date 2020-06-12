@@ -4,6 +4,7 @@ import static it.gruppopam.app_common.utils.AppConstants.ARTICLE_ID_MIN_LENGTH;
 import static it.gruppopam.app_common.utils.AppConstants.INVALID_ARTICLE_ID;
 import static it.gruppopam.app_common.utils.AppConstants.MASK_VALUE_FOR_ARTICLE_ID;
 import static it.gruppopam.app_common.utils.AppConstants.PREFIX_CHAR_OF_VALID_BARCODE;
+import static it.gruppopam.app_common.utils.BarcodeUtils.isNormalizeEan8Pam;
 
 public final class ArticleIdUtils {
 
@@ -25,8 +26,12 @@ public final class ArticleIdUtils {
     }
 
     public boolean isValidBarCode(String maskedArticleBarCode) {
-        return maskedArticleBarCode.length() == articleIdBarcodeLength
-                && maskedArticleBarCode.charAt(0) == PREFIX_CHAR_OF_VALID_BARCODE;
+        if (isNormalizeEan8Pam(maskedArticleBarCode)) {
+            return true;
+        } else {
+            return maskedArticleBarCode.length() == articleIdBarcodeLength
+                    && maskedArticleBarCode.charAt(0) == PREFIX_CHAR_OF_VALID_BARCODE;
+        }
     }
 
     public boolean isValidArticleId(String articleId) {

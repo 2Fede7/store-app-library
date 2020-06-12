@@ -2,8 +2,8 @@ package it.gruppopam.app_common.utils;
 
 import org.junit.Before;
 import org.junit.Test;
-import static it.gruppopam.app_common.utils.AppConstants.*;
 
+import static it.gruppopam.app_common.utils.AppConstants.INVALID_ARTICLE_ID;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertFalse;
@@ -23,6 +23,30 @@ public class ArticleIdUtilsTest {
     public void shouldExtractArticleId() {
         long articleId = articleIdUtils.extractArticleId("22218049");
         assertThat(articleId, is(2218049L));
+
+        long articleId2 = articleIdUtils.extractArticleId("21180491");
+        assertThat(articleId2, is(1180491L));
+
+        long articleId3 = articleIdUtils.extractArticleId("20318048");
+        assertThat(articleId3, is(318048L));
+
+        long articleId4 = articleIdUtils.extractArticleId("20018047");
+        assertThat(articleId4, is(18047L));
+    }
+
+    @Test
+    public void shouldExtractArticleIdNormalize() {
+        long articleId = articleIdUtils.extractArticleId("0000022218049");
+        assertThat(articleId, is(2218049L));
+
+        long articleId2 = articleIdUtils.extractArticleId("0000021180491");
+        assertThat(articleId2, is(1180491L));
+
+        long articleId3 = articleIdUtils.extractArticleId("0000020318048");
+        assertThat(articleId3, is(318048L));
+
+        long articleId4 = articleIdUtils.extractArticleId("0000020018047");
+        assertThat(articleId4, is(18047L));
     }
 
     @Test
