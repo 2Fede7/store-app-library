@@ -37,7 +37,7 @@ public abstract class BaseBarcodeCalculationTemplate {
         return Optional.of(extractCode(normalizeBarcode(barcode)));
     }
 
-    public abstract boolean isValidSearch(String searchString);
+    public abstract boolean isValidSearch(String searchString) throws InvalidBarcodeException;
 
     public abstract List findArticles(String searchString, int MAX_SEARCH_RESULTS);
 
