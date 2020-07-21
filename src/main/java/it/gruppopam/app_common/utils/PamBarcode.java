@@ -12,7 +12,7 @@ public class PamBarcode extends BaseEan8Barcode {
 
     @Override
     public boolean isValid(String barcode) {
-        return barcode.length() == ARTICLE_ID_BARCODE_LENGTH
+        return barcode.length() == ARTICLE_ID_BARCODE_LENGTH_8
             && getCheckDigitNumber(barcode) == calculateCheckDigit(barcode);
     }
 
@@ -23,7 +23,7 @@ public class PamBarcode extends BaseEan8Barcode {
 
     @Override
     public String normalizeBarcode(String barcode) {
-        return String.valueOf(new ArticleIdUtils(ARTICLE_ID_BARCODE_LENGTH,
+        return String.valueOf(new ArticleIdUtils(ARTICLE_ID_BARCODE_LENGTH_8,
                 ARTICLE_ID_MAX_LENGTH).extractArticleId(barcode));
     }
 

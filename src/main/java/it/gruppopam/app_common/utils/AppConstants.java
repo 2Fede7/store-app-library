@@ -3,7 +3,10 @@ package it.gruppopam.app_common.utils;
 //@SuppressWarnings("PMD.ClassNamingConventions")
 public final class AppConstants {
 
-    public static final int ARTICLE_ID_BARCODE_LENGTH = 8;
+    public static final int ARTICLE_ID_BARCODE_LENGTH_6 = 6;
+    public static final int ARTICLE_ID_BARCODE_LENGTH_8 = 8;
+    public static final int ARTICLE_ID_BARCODE_LENGTH_9 = 9;
+    public static final int ARTICLE_ID_BARCODE_LENGTH_12 = 12;
     public static final int ARTICLE_ID_BARCODE_LENGTH_13 = 13;
     public static final int BARCODE_MAX_LENGTH = 13;
     public static final int ARTICLE_ID_MAX_LENGTH = 7;

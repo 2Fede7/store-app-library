@@ -16,7 +16,7 @@ public abstract class BaseBarcodeCalculationTemplate {
         return StringUtils.isEmpty(barcode);
     }
 
-    public abstract boolean isValid(String barcode) throws InvalidBarcodeException;
+    public abstract boolean isValid(String barcode, String type) throws InvalidBarcodeException;
 
     public Integer getCheckDigit(String barcode) throws InvalidBarcodeException {
         if (!isEmpty(barcode)) {
@@ -29,8 +29,8 @@ public abstract class BaseBarcodeCalculationTemplate {
 
     protected abstract Long extractCode(String barcode);
 
-    public final Optional<Long> computeCode(String barcode) throws InvalidBarcodeException {
-        if (isEmpty(barcode) || !isValid(barcode)) {
+    public final Optional<Long> computeCode(String barcode, String type) throws InvalidBarcodeException {
+        if (isEmpty(barcode) || !isValid(barcode, type)) {
             return Optional.empty();
         }
 
