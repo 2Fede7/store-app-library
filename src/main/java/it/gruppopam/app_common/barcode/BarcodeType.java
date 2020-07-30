@@ -4,13 +4,13 @@ import lombok.Getter;
 
 public enum BarcodeType {
 
-    EAN8("LABEL_TYPE_EAN8"),
+    EAN8("LABEL-TYPE-EAN8"),
 
-    EAN13("LABEL_TYPE_EAN13"),
+    EAN13("LABEL-TYPE-EAN13"),
 
-    UPCA("LABEL_TYPE_UPCA"),
+    UPCA("LABEL-TYPE-UPCA"),
 
-    UPCE("LABEL_TYPE_UPCE0"),
+    UPCE("LABEL-TYPE-UPCE0"),
 
     NONE(null);
 
