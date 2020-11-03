@@ -19,9 +19,8 @@ public abstract class CheckForUpdateUtil extends AsyncTask<Void, String, Boolean
 
     private static final String TAG = CheckForUpdateUtil.class.getCanonicalName();
 
-    //public static final String CHECK_FOR_UPDATE = "CHECK_FOR_UPDATE";
-
     public final static String UPDATE_INTENT_KEY = "UPDATE_INTENT_KEY";
+    public static final String CHECK_FOR_UPDATE = "CHECK_FOR_UPDATE";
     public static final String UPDATE_FOUND = "UPDATE_FOUND";
     public static final String NO_UPDATE = "NO_UPDATE";
 
