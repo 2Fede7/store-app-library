@@ -1,8 +1,5 @@
 package it.gruppopam.app_common.utils;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.IOException;
@@ -14,22 +11,17 @@ import retrofit2.Response;
 
 import static it.gruppopam.app_common.utils.AppVersionUtil.DESIRED_VERSION_ID;
 import static it.gruppopam.app_common.utils.AppVersionUtil.DESIRED_VERSION_TYPE;
+import static it.gruppopam.app_common.utils.AppVersionUtil.STORE_UTILITIES_APP;
 
-public abstract class CheckForUpdateUtil extends AsyncTask<Void, String, Boolean> {
+public class CheckForUpdateUtil {
 
     private static final String TAG = CheckForUpdateUtil.class.getCanonicalName();
 
-    public final static String UPDATE_INTENT_KEY = "UPDATE_INTENT_KEY";
+    public static final String UPDATE_INTENT_KEY = "UPDATE_INTENT_KEY";
     public static final String CHECK_FOR_UPDATE = "CHECK_FOR_UPDATE";
     public static final String UPDATE_FOUND = "UPDATE_FOUND";
     public static final String NO_UPDATE = "NO_UPDATE";
 
-    public static final String STORE_UTILITIES_APP = "STORE_UTILITIES_APP";
-    public static final String STORE_REPLENISHMENT_APP = "STORE_REPLENISHMENT_APP";
-
-
-    @Getter
-    private Context context;
     @Getter
     private AppVersionDetail appVersionDetail;
 
@@ -41,33 +33,13 @@ public abstract class CheckForUpdateUtil extends AsyncTask<Void, String, Boolean
     private DeviceAppManagerApi deviceAppManagerApi;
 
     public CheckForUpdateUtil(String app, Long storeId, Long currentVersionId, String currentVersionType,
-                              DeviceAppManagerApi deviceAppManagerApi, Context context) {
+                              DeviceAppManagerApi deviceAppManagerApi) {
         this.app = app;
         this.storeId = storeId;
         this.currentVersionId = currentVersionId;
         this.currentVersionType = currentVersionType;
         this.deviceAppManagerApi = deviceAppManagerApi;
-        this.context = context;
     }
-
-    @Override
-    protected Boolean doInBackground(Void... voids) {
-        return checkVersion();
-    }
-
-    @Override
-    protected void onProgressUpdate(String... status) {
-    }
-
-    @Override
-    protected void onPostExecute(Boolean result) {
-        if (result) {
-            Intent progressIntent = createIntentWithProgress(UPDATE_FOUND);
-            context.startActivity(progressIntent);
-        }
-    }
-
-    public abstract Intent createIntentWithProgress(String status);
 
     public boolean checkVersion() {
 
@@ -80,27 +52,27 @@ public abstract class CheckForUpdateUtil extends AsyncTask<Void, String, Boolean
                 response = deviceAppManagerApi.validateApkVersion(storeId, currentVersionType, currentVersionId).execute();
             }
 
-            if (AppVersionUtil.isResponseValid(response)) {
+            if (AppVersionUtil.isResponseValid(app, response)) {
 
                 int versionId = Integer.parseInt(response.raw().headers().get(DESIRED_VERSION_ID));
                 String versionType = response.raw().headers().get(DESIRED_VERSION_TYPE);
                 appVersionDetail = new AppVersionDetail(app, storeId, versionType, versionId);
 
-
                 if (!response.isSuccessful()) {
                     Log.e(TAG, "WRONG APP VERSION");
-                    publishProgress(UPDATE_FOUND);
-                    return true;
+                    return false;
                 }
 
+            } else {
+                return false;
             }
-
 
         } catch (IOException e) {
             Log.e(TAG, e.getMessage());
+            return false;
         }
 
-        return false;
+        return true;
     }
 
 }

@@ -16,6 +16,8 @@ public class AppVersionUtil {
     public static final String DESIRED_VERSION_ID = "X-Desired-Version-Id";
     public static final String DESIRED_VERSION_TYPE = "X-Desired-Version-Type";
 
+    public static final String STORE_UTILITIES_APP = "STORE_UTILITIES_APP";
+    public static final String STORE_REPLENISHMENT_APP = "STORE_REPLENISHMENT_APP";
 
     public AppVersionUtil() {
     }
@@ -30,13 +32,23 @@ public class AppVersionUtil {
         return builder.create();
     }
 
-    public static boolean isResponseValid(Response response) {
-        return response != null && response.raw() != null && isHeadersPresent(response);
+    public static boolean isResponseValid(String app, Response response) {
+        return response != null && response.raw() != null && isHeadersPresent(app, response);
     }
 
-    public static boolean isHeadersPresent(Response response) {
+    public static boolean isHeadersPresent(String app, Response response) {
         int versionId = Integer.parseInt(response.raw().headers().get(DESIRED_VERSION_ID));
-        String versionType = response.raw().headers().get(DESIRED_VERSION_TYPE);
+        String versionType;
+        switch (app.toUpperCase()) {
+            case STORE_REPLENISHMENT_APP:
+                versionType = response.raw().headers().get(DESIRED_VERSION_TYPE);
+                break;
+            case STORE_UTILITIES_APP:
+                versionType = "ANY";
+                break;
+            default:
+                return false;
+        }
         return versionId > 0 && versionType != null;
     }
 
