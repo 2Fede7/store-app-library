@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 group = 'it.gruppopam.android'
-version = '1.0.6'
+version = '1.0.7'
 description = 'Android library for store apps'
 
 buildscript {

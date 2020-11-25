@@ -1,5 +1,7 @@
 package it.gruppopam.app_common.utils;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.IOException;
@@ -13,15 +15,17 @@ import static it.gruppopam.app_common.utils.AppVersionUtil.DESIRED_VERSION_ID;
 import static it.gruppopam.app_common.utils.AppVersionUtil.DESIRED_VERSION_TYPE;
 import static it.gruppopam.app_common.utils.AppVersionUtil.STORE_UTILITIES_APP;
 
-public class CheckForUpdateUtil {
+public abstract class CheckForUpdateAsyncTask extends AsyncTask<Void, String, Boolean> {
 
-    private static final String TAG = CheckForUpdateUtil.class.getCanonicalName();
+    private static final String TAG = CheckForUpdateAsyncTask.class.getCanonicalName();
 
     public static final String UPDATE_INTENT_KEY = "UPDATE_INTENT_KEY";
     public static final String CHECK_FOR_UPDATE = "CHECK_FOR_UPDATE";
     public static final String UPDATE_FOUND = "UPDATE_FOUND";
     public static final String NO_UPDATE = "NO_UPDATE";
 
+    @Getter
+    private Context context;
     @Getter
     private AppVersionDetail appVersionDetail;
 
@@ -32,14 +36,27 @@ public class CheckForUpdateUtil {
 
     private DeviceAppManagerApi deviceAppManagerApi;
 
-    public CheckForUpdateUtil(String app, Long storeId, Long currentVersionId, String currentVersionType,
-                              DeviceAppManagerApi deviceAppManagerApi) {
+    public CheckForUpdateAsyncTask(String app, Long storeId, Long currentVersionId, String currentVersionType,
+                                   DeviceAppManagerApi deviceAppManagerApi, Context context) {
         this.app = app;
         this.storeId = storeId;
         this.currentVersionId = currentVersionId;
         this.currentVersionType = currentVersionType;
         this.deviceAppManagerApi = deviceAppManagerApi;
+        this.context = context;
     }
+
+    @Override
+    protected Boolean doInBackground(Void... voids) {
+        return checkVersion();
+    }
+
+    @Override
+    protected void onProgressUpdate(String... status) {
+    }
+
+    @Override
+    protected abstract void onPostExecute(Boolean result);
 
     public boolean checkVersion() {
 
