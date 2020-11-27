@@ -81,12 +81,12 @@ public abstract class CheckForUpdateAsyncTask extends AsyncTask<Void, String, Bo
                 }
 
             } else {
-                return false;
+                return true;
             }
 
         } catch (IOException e) {
             Log.e(TAG, e.getMessage());
-            return false;
+            return true;
         }
 
         return true;
