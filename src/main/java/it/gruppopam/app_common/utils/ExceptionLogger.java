@@ -17,14 +17,14 @@ public final class ExceptionLogger {
     public static void logError(String tag, String message) {
         Log.e(tag, message);
         ErrorReporter errorReporter = ACRA.getErrorReporter();
-        errorReporter.clearCustomData();
+        clearCustomData();
         errorReporter.putCustomData("REASON", message);
         errorReporter.handleException(null);
     }
 
     public static void logError(String tag, String message, Throwable t) {
         Log.e(tag, message, t);
-        ACRA.getErrorReporter().clearCustomData();
+        clearCustomData();
         ACRA.getErrorReporter().handleException(t);
     }
 
@@ -46,14 +46,14 @@ public final class ExceptionLogger {
         Log.e(tag, message);
         try {
             ErrorReporter errorReporter = ACRA.getErrorReporter();
-            errorReporter.clearCustomData();
+            clearCustomData();
             errorReporter.putCustomData("UUID", uuid);
             String responseAsString = getBodyAsString(response);
             errorReporter.putCustomData("ERROR_TRACE", responseAsString);
             errorReporter.handleException(null);
         } catch (IOException e) {
             ErrorReporter errorReporter = ACRA.getErrorReporter();
-            errorReporter.clearCustomData();
+            clearCustomData();
             errorReporter.putCustomData("UUID", uuid);
             errorReporter.handleException(null);
             Log.e(tag, e.getLocalizedMessage());
@@ -72,5 +72,12 @@ public final class ExceptionLogger {
         }
 
         return responseAsString.replaceAll("\\n", " ");
+    }
+
+    private static void clearCustomData() {
+        ErrorReporter errorReporter = ACRA.getErrorReporter();
+        errorReporter.removeCustomData("REASON");
+        errorReporter.removeCustomData("UUID");
+        errorReporter.removeCustomData("ERROR_TRACE");
     }
 }
