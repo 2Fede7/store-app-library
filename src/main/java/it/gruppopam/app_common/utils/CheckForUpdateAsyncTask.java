@@ -15,7 +15,7 @@ import static it.gruppopam.app_common.utils.AppVersionUtil.DESIRED_VERSION_ID;
 import static it.gruppopam.app_common.utils.AppVersionUtil.DESIRED_VERSION_TYPE;
 import static it.gruppopam.app_common.utils.AppVersionUtil.STORE_UTILITIES_APP;
 
-public abstract class CheckForUpdateAsyncTask extends AsyncTask<Void, String, Boolean> {
+public abstract class CheckForUpdateAsyncTask extends AsyncTask<Void, String, CheckForUpdateAsyncTask.VersionCheck> {
 
     private static final String TAG = CheckForUpdateAsyncTask.class.getCanonicalName();
 
@@ -47,7 +47,7 @@ public abstract class CheckForUpdateAsyncTask extends AsyncTask<Void, String, Bo
     }
 
     @Override
-    protected Boolean doInBackground(Void... voids) {
+    protected VersionCheck doInBackground(Void... voids) {
         return checkVersion();
     }
 
@@ -56,9 +56,9 @@ public abstract class CheckForUpdateAsyncTask extends AsyncTask<Void, String, Bo
     }
 
     @Override
-    protected abstract void onPostExecute(Boolean result);
+    protected abstract void onPostExecute(VersionCheck result);
 
-    public boolean checkVersion() {
+    public VersionCheck checkVersion() {
 
         try {
             Response<ResponseBody> response;
@@ -77,19 +77,24 @@ public abstract class CheckForUpdateAsyncTask extends AsyncTask<Void, String, Bo
 
                 if (!response.isSuccessful()) {
                     Log.e(TAG, "WRONG APP VERSION");
-                    return false;
+                    return VersionCheck.KO;
                 }
-
-            } else {
-                return true;
+                return VersionCheck.OK;
             }
+
+            // unable to get valid response
+            return VersionCheck.NA;
 
         } catch (IOException e) {
             Log.e(TAG, e.getMessage());
-            return true;
+            return VersionCheck.NA;
         }
+    }
 
-        return true;
+    public enum VersionCheck {
+        OK,
+        KO,
+        NA
     }
 
 }
