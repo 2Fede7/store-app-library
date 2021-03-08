@@ -19,6 +19,13 @@ public class QueryHelperTest {
     }
 
     @Test
+    public void checkSearchArticleWithApostropheAndSQLInjection() {
+        String articleName = "Sambuco bio 'DROP table articles;' l'Angelica";
+        String returnedString = QueryHelper.getSafeString(articleName);
+        assertEquals("Sambuco bio ''DROP table articles;'' l''Angelica", returnedString);
+    }
+
+    @Test
     public void checkSearchArticleWithDoubleQuotes() {
         String articleName = "TRAPUNTA \"HILARY\" STAMPATA 1 P";
         String returnedString = QueryHelper.getSafeString(articleName);
@@ -30,6 +37,20 @@ public class QueryHelperTest {
         String articleName = "SERVIZIO C. BS DOG 3?";
         String returnedString = QueryHelper.getSafeString(articleName);
         assertEquals("SERVIZIO C. BS DOG 3?", returnedString);
+    }
+
+    @Test
+    public void checkBoolean() {
+        Object paramValue = true;
+        String returnedString = QueryHelper.getSafeBoolean(paramValue);
+        assertEquals(Boolean.TRUE.toString(), returnedString);
+    }
+
+    @Test
+    public void checkBooleanFail() {
+        Object paramValue = "DROP table articles;";
+        String returnedString = QueryHelper.getSafeBoolean(paramValue);
+        assertEquals(Boolean.FALSE.toString(), returnedString);
     }
 
 }
