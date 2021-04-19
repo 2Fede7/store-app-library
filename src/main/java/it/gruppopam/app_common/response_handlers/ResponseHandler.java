@@ -30,7 +30,9 @@ public abstract class ResponseHandler<U, V> {
             inTransactionHandle(response, repository);
             repository.setTransactionSuccessful();
         } catch (Exception throwable) {
-            ExceptionLogger.logError(LOG_TAG, "Error while parsing json response", throwable);
+            String error_message = "Error while persisting response";
+            ExceptionLogger.logError(LOG_TAG, error_message, throwable);
+            throw new RuntimeException(error_message, throwable);
         } finally {
             endTransaction(repository);
         }

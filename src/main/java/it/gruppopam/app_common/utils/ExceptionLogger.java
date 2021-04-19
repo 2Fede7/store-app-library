@@ -15,17 +15,17 @@ public final class ExceptionLogger {
     }
 
     public static void logError(String tag, String message) {
-        Log.e(tag, message);
-        ErrorReporter errorReporter = ACRA.getErrorReporter();
-        clearCustomData();
-        errorReporter.putCustomData("REASON", message);
-        errorReporter.handleException(null);
+        logError(tag, message, (Throwable)null);
     }
 
     public static void logError(String tag, String message, Throwable t) {
         Log.e(tag, message, t);
+        ErrorReporter errorReporter = ACRA.getErrorReporter();
         clearCustomData();
-        ACRA.getErrorReporter().handleException(t);
+        errorReporter.putCustomData("REASON", message);
+        if (t != null) {
+            ACRA.getErrorReporter().handleException(t);
+        }
     }
 
     public static String logAcraReport(String tag, String message, Response response) {
