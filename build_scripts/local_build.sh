@@ -1,3 +1,3 @@
 #!/bin/bash -el
 
-./gradlew clean uploadArchives
+./gradlew clean check uploadArchives

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="order_option_stocked_color">#BE9BDB</color>
+    <color name="order_option_xd_color">#A5DCBC</color>
+    <color name="order_option_direct_color">#b8e2ef</color>
+    <color name="notification_menu_item_highlighted">#286b4d</color>
+</resources>

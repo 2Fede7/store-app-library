@@ -1,7 +1,8 @@
 package it.gruppopam.app_common.sync;
 
 import android.app.Application;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;

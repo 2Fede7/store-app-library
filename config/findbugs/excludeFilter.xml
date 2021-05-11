@@ -1,0 +1,18 @@
+<FindBugsFilter>
+    <Match>
+        <Bug code="EI,EI2" />
+    </Match>
+
+    <Match>
+        <Class name="~.*?Test" />
+    </Match>
+
+    <Match>
+        <!-- Android Instant runner related -->
+        <Class name="~.*?override.*" />
+    </Match>
+
+    <Match>
+        <Package name="~.*?third_party" />
+    </Match>
+</FindBugsFilter>

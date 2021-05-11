@@ -31,7 +31,7 @@ public class SendMailTask extends AsyncTask<Void, Void, Boolean> {
     private int mail_sending_failed;
 
     public SendMailTask(Session session, String subject, String fromAddress, String toAddress, String body,
-                 File attachment, MailResponseHandler responseHandler, int mail_sent_successfully, int mail_sending_failed) {
+                        File attachment, MailResponseHandler responseHandler, int mail_sent_successfully, int mail_sending_failed) {
         this.session = session;
         this.subject = subject;
         this.fromAddress = fromAddress;

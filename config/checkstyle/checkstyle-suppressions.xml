@@ -1,0 +1,61 @@
+<?xml version="1.0"?><!DOCTYPE suppressions PUBLIC
+    "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+    "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+    <suppress checks="[FileLength]" files="OrderDetailActivity.java" />
+    <suppress checks="[FileLength]" files="OrderDetailFragment.java" />
+    <suppress checks="[FileLength]" files="DebugActivity.java" />
+    <suppress checks="[FileLength]" files="Article.java" />
+    <suppress checks="[FileLength]" files="DraftOrder.java" />
+    <suppress checks="[FileLength]" files="ArticleDetailsPage.java" />
+    <suppress checks="[FileLength]" files="ArticleSearchActivity.java" />
+    <suppress checks="[FileLength]" files="ActivityTracker.java" />
+    <suppress checks="[FileLength]" files="DraftOrderArticleRepository.java" />
+    <suppress checks="[FileLength]" files="AppConstants.java" />
+    <suppress checks="[FileLength]" files="OrderedArticleDetailVm.java" />
+    <suppress checks="[FileLength]" files="OrderComponentStatusVm.java" />
+    <suppress checks="[FileLength]" files="ArticleDetailFragmentVm.java" />
+    <suppress checks="[FileLength]" files="PlanogramDetailActivity.java" />
+    <suppress checks="[FileLength]" files="SuggestionSectionArticlesListFragment.java" />
+    <suppress checks="[FileLength]" files="BulkSelectionFragment.java" />
+    <suppress checks="[ClassFanOutComplexity]" files="NotificationsMenuHandler.java" />
+    <suppress checks="[ClassFanOutComplexity]" files="OrderOptionSelectionActivity.java" />
+    <suppress checks="[ClassFanOutComplexity]" files="BindModule.java" />
+    <suppress checks="[ClassFanOutComplexity]" files="PlanogramDetailActivity.java" />
+    <suppress checks="[NPathComplexity]" files="AboutMenuActivity.java" />
+    <suppress checks="[NPathComplexity]" files="NetworkUtils.java" />
+    <suppress checks="[NPathComplexity]" files="DraftOrderComponentsJob.java" />
+    <suppress checks="[NPathComplexity]" files="UpdateDraftOrderEddJob.java" />
+    <suppress checks="[NPathComplexity]" files="SupportingDataHelper.java" />
+    <suppress checks="[NPathComplexity]" files="SupplierListAdapter.java" />
+    <suppress checks="[NPathComplexity]" files="PlanogramDetailVm.java" />
+    <suppress checks="[NPathComplexity]" files="DataWedgeProfileLoader.java" />
+    <suppress checks="[NPathComplexity]" files="PlaceOrderDialogHandler.java" />
+    <suppress checks="[NPathComplexity]" files="PlanogramDetailListAdapter.java" />
+    <suppress checks="[NPathComplexity]" files="ArticleRepository.java" />
+    <suppress checks="[ClassDataAbstractionCouplingCheck]" files="SyncRequestService.java" />
+    <suppress checks="[ClassDataAbstractionCouplingCheck]" files="StoreReplenishmentModule.java" />
+    <suppress checks="[ClassDataAbstractionCouplingCheck]" files="JobModule.java" />
+    <suppress checks="[ClassDataAbstractionCouplingCheck]" files="DraftOrderArticleService.java" />
+    <suppress checks="[ClassDataAbstractionCouplingCheck]" files="DraftOrderService.java" />
+    <suppress checks="[ClassDataAbstractionCouplingCheck]" files="OrderIdJob.java" />
+    <suppress checks="[ClassDataAbstractionCouplingCheck]" files="JobComponent.java" />
+    <suppress checks="[ClassDataAbstractionCouplingCheck]" files="PlanogramDetailActivity.java" />
+    <suppress checks="[ModifiedControlVariable]" files="StockedSalesRepository.java" />
+    <suppress checks="[ClassFanOutComplexity]" files="OrderDetailFragmentHandler.java" />
+    <suppress checks="[ClassFanOutComplexity]" files="SuggestionsFilterDialogFragment.java" />
+    <suppress checks="[ClassFanOutComplexity]" files="StoreReplenishmentComponent.java" />
+    <suppress checks="[DeclarationOrder]"  files="SuggestionsFilterDialogFragment.java" />
+    <suppress checks="[VisibilityModifier]"  files="PullJob.java" />
+    <suppress checks="[VisibilityModifier]"  files="PushJob.java" />
+    <suppress checks="[ExecutableStatementCountCheck]" files="ArticleMapper.java" />
+
+    <!-- Test & Generated Files -->
+    <suppress checks="[FileLength]" files="ModelTestUtils.java" />
+    <suppress checks="." files="[\\/]app[\\/]build[\\/]" />
+    <suppress checks="." files="[\\/]third_party[\\/]" />
+    <suppress checks="[a-zA-Z0-9]*" files="[\\/]generated-sources[\\/]" />
+    <suppress checks="[ClassDataAbstractionCoupling]" files="[\\/]src[\\/]test[\\/]" />
+    <suppress checks="." files="[\\/]src[\\/]androidTest[\\/]" />
+</suppressions>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--ORDER COMPONENT-->
+    <string name="grocery_merchandise_area_name">GROCERY</string>
+    <string name="dls_cheese_salami_merchandise_area_name">DLS + SA.FO. + GASTRONOMY</string>
+    <string name="non_food_merchandise_area_name">NON FOOD</string>
+    <string name="dcs_bakery_department_name">DCS BAKERY</string>
+    <string name="dcs_fish_department_name">DCS FISH</string>
+    <string name="dcs_fruits_veggies_department_name">DCS FRUITS &amp; VEGETABLES</string>
+    <string name="dcs_gastronomy_department_name">DCS GASTRONOMY</string>
+    <string name="dcs_meat_department_name">DCS MEAT</string>
+    <string name="servizi_generali_merchandise_area_name">SERVIZI GENERALI</string>
+    <string name="packaging_articles_department_name">PACKAGING ARTICLES</string>
+    <string name="light_bazaar_sector_name">LIGHT BAZAAR</string>
+    <string name="heavy_bazaar_sector_name">HEAVY BAZAAR</string>
+    <string name="textiles_sector_name">TEXTILES</string>
+
+    <!--ORDER OPTION-->
+    <string name="cedi_stocked_logistic_option_title"><![CDATA[GROCERY & UHT]]></string>
+    <string name="cedi_stocked_logistic_option_subtitle">CEDI ORDER</string>
+    <string name="grocery_cidd_stocked_logistic_option_title">DLS CHOCOLATE</string>
+    <string name="grocery_cidd_logistic_option_subtitle">CIDD GROCERY</string>
+    <string name="grocery_xd_logistic_option_title">GROCERY</string>
+    <string name="grocery_xd_logistic_option_subtitle">XD ORDERS</string>
+
+    <string name="dcs_xd_logistic_option_title">DCS</string>
+    <string name="dcs_xd_logistic_option_subtitle">XD ORDERS</string>
+
+    <string name="dls_cidd_stocked_logistic_option_title">DLS/DCS FRESH</string>
+    <string name="dcs_cidd_stocked_logistic_option_title">DCS FRESH</string>
+    <string name="cidd_latticini_logistic_option_subtitle">CIDD LATTICINI</string>
+    <string name="cidd_gcs_logistic_option_subtitle">CIDD GAS. FROM. SALAMIE</string>
+    <string name="cidd_ortofrutta_logistic_option_subtitle">CIDD ORTOFRUTTA</string>
+    <string name="cidd_pesce_logistic_option_subtitle">CIDD PESCE</string>
+    <string name="cidd_carne_logistic_option_subtitle">CIDD CARNE</string>
+
+    <string name="surgelati_stocked_logistic_option_title">FROZEN</string>
+    <string name="surgelati_stocked_logistic_option_subtitle">CEDI FROZEN ORDER</string>
+
+    <string name="grocery_direct_logistic_option_title">GROCERY</string>
+    <string name="dls_cheese_salami_direct_logistic_option_title">DLS CHEESE SALAMI</string>
+    <string name="dcs_bakery_direct_logistic_option_title">DCS BAKERY</string>
+    <string name="dcs_fruits_and_vegetables_direct_logistic_option_title">DCS FRUITS AND VEGETABLES</string>
+    <string name="dcs_gastronomy_direct_logistic_option_title">DCS GASTRONOMY</string>
+    <string name="dcs_carne_direct_logistic_option_title">DCS CARNE</string>
+    <string name="dcs_pesce_direct_logistic_option_title">DCS PESCE</string>
+    <string name="direct_logistic_option_subtitle">DIRECT ORDERS</string>
+
+    <string name="light_bazaar_logistic_option_title">LIGHT BAZAAR</string>
+    <string name="heavy_bazaar_logistic_option_title">HEAVY BAZAAR</string>
+    <string name="textiles_logistic_option_title">TEXTILES</string>
+    <string name="packaging_articles_direct_logistic_option_title">PACKAGING ARTICLE DIRECT</string>
+    <string name="non_food_cedi_logistic_option_title">NON FOOD CEDI</string>
+    <string name="non_food_xd_logistic_option_subtitle">XD ORDERS</string>
+    <string name="non_food_direct_logistic_option_subtitle">DIRECT ORDERS</string>
+
+</resources>

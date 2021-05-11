@@ -13,7 +13,6 @@ import retrofit2.Response;
 
 import static it.gruppopam.app_common.utils.AppVersionUtil.DESIRED_VERSION_ID;
 import static it.gruppopam.app_common.utils.AppVersionUtil.DESIRED_VERSION_TYPE;
-import static it.gruppopam.app_common.utils.AppVersionUtil.STORE_UTILITIES_APP;
 
 public abstract class CheckForUpdateAsyncTask extends AsyncTask<Void, String, CheckForUpdateAsyncTask.VersionCheck> {
 
@@ -63,11 +62,7 @@ public abstract class CheckForUpdateAsyncTask extends AsyncTask<Void, String, Ch
         try {
             Response<ResponseBody> response;
 
-            if (STORE_UTILITIES_APP.equals(app)) {
-                response = deviceAppManagerApi.validateApkVersion(currentVersionId).execute();
-            } else {
-                response = deviceAppManagerApi.validateApkVersion(storeId, currentVersionType, currentVersionId).execute();
-            }
+            response = deviceAppManagerApi.validateApkVersion(storeId, app, currentVersionType, currentVersionId).execute();
 
             if (AppVersionUtil.isResponseValid(app, response)) {
 

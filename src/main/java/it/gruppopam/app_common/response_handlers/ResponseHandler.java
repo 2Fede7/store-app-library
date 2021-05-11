@@ -8,42 +8,34 @@ import retrofit2.Response;
 public abstract class ResponseHandler<U, V> {
     protected final String LOG_TAG = this.getClass().getSimpleName();
 
-    public void handleResponse(Response<U> response, Persistable<V> repository) throws Throwable {
+    public void handleResponse(Response<U> response, Persistable<V> repository) {
         if (response.isSuccessful()) {
             processSuccessfulResponse(response, repository);
         } else {
-            manageError(response, repository);
+            manageError(response);
         }
 
     }
 
-    public void manageError(Response<U> response, Persistable<V> repository) {
+    public void manageError(Response<U> response) {
         String message = "Response return code was not successful (status code out of range 200-300)";
         String exceptionMessage = ExceptionLogger.logAcraReport(LOG_TAG, message, response);
         throw new RuntimeException(exceptionMessage);
     }
 
-    private void processSuccessfulResponse(Response<U> response, Persistable<V> repository) throws Throwable {
+    private void processSuccessfulResponse(Response<U> response, Persistable<V> repository) {
         try {
             preTransaction(response);
-            repository.beginTransaction();
-            inTransactionHandle(response, repository);
-            repository.setTransactionSuccessful();
+            repository.runInTransaction(() -> inTransactionHandle(response, repository));
         } catch (Exception throwable) {
             String error_message = "Error while persisting response";
             ExceptionLogger.logError(LOG_TAG, error_message, throwable);
             throw new RuntimeException(error_message, throwable);
-        } finally {
-            endTransaction(repository);
         }
     }
 
     protected void preTransaction(Response<U> response) {
     }
 
-    protected void endTransaction(Persistable<V> repository) {
-        repository.endTransaction();
-    }
-
-    protected abstract void inTransactionHandle(Response<U> response, Persistable<V> repository) throws Throwable;
+    protected abstract void inTransactionHandle(Response<U> response, Persistable<V> repository);
 }

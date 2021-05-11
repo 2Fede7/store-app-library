@@ -9,7 +9,7 @@ import java.util.List;
 
 import retrofit2.Response;
 
-public class AppVersionUtil {
+public final class AppVersionUtil {
 
     private static final String TAG = AppVersionUtil.class.getCanonicalName();
 
@@ -19,7 +19,7 @@ public class AppVersionUtil {
     public static final String STORE_UTILITIES_APP = "STORE_UTILITIES_APP";
     public static final String STORE_REPLENISHMENT_APP = "STORE_REPLENISHMENT_APP";
 
-    public AppVersionUtil() {
+    private AppVersionUtil() {
     }
 
     public static AlertDialog setupAlertDialog(int title, int message, DialogInterface.OnClickListener listener, Context context) {
@@ -38,17 +38,8 @@ public class AppVersionUtil {
 
     public static boolean isHeadersPresent(String app, Response response) {
         int versionId = Integer.parseInt(response.raw().headers().get(DESIRED_VERSION_ID));
-        String versionType;
-        switch (app.toUpperCase()) {
-            case STORE_REPLENISHMENT_APP:
-                versionType = response.raw().headers().get(DESIRED_VERSION_TYPE);
-                break;
-            case STORE_UTILITIES_APP:
-                versionType = "ANY";
-                break;
-            default:
-                return false;
-        }
+        String versionType = response.raw().headers().get(DESIRED_VERSION_TYPE);
+
         return versionId > 0 && versionType != null;
     }
 
@@ -58,8 +49,9 @@ public class AppVersionUtil {
         List<ActivityManager.RunningTaskInfo> tasks = activityManager.getRunningTasks(Integer.MAX_VALUE);
 
         for (ActivityManager.RunningTaskInfo task : tasks) {
-            if (ctx.getPackageName().equalsIgnoreCase(task.baseActivity.getPackageName()))
+            if (ctx.getPackageName().equalsIgnoreCase(task.baseActivity.getPackageName())) {
                 return true;
+            }
         }
         return false;
     }

@@ -1,5 +1,6 @@
 package it.gruppopam.app_common.network.util;
 
+@SuppressWarnings("PMD.ClassNamingConventions")
 public final class NetworkUtilProvider {
 
     private static NetworkUtil instance;

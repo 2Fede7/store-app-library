@@ -15,7 +15,7 @@ public final class ExceptionLogger {
     }
 
     public static void logError(String tag, String message) {
-        logError(tag, message, (Throwable)null);
+        logError(tag, message, (Throwable) null);
     }
 
     public static void logError(String tag, String message, Throwable t) {
@@ -25,18 +25,6 @@ public final class ExceptionLogger {
         errorReporter.putCustomData("REASON", message);
         if (t != null) {
             ACRA.getErrorReporter().handleException(t);
-        }
-    }
-
-    public static String logAcraReport(String tag, String message, Response response) {
-        String uuid = response.raw().request().header("X-Request-Id");
-        Log.e(tag, message);
-        try {
-            String responseAsString = getBodyAsString(response);
-            return String.format("MESSAGE: %s UUID : %s RESPONSE : ", message, uuid) + responseAsString.substring(0, Math.min(responseAsString.length(), 1000));
-        } catch (IOException e) {
-            Log.e(tag, e.getLocalizedMessage());
-            return String.format("MESSAGE: %s UUID : %s ", message, uuid);
         }
     }
 
@@ -59,6 +47,18 @@ public final class ExceptionLogger {
             Log.e(tag, e.getLocalizedMessage());
         } catch (Exception e) {
             Log.e(tag, e.getLocalizedMessage());
+        }
+    }
+
+    public static String logAcraReport(String tag, String message, Response response) {
+        String uuid = response.raw().request().header("X-Request-Id");
+        Log.e(tag, message);
+        try {
+            String responseAsString = getBodyAsString(response);
+            return String.format("MESSAGE: %s UUID : %s RESPONSE : ", message, uuid) + responseAsString.substring(0, Math.min(responseAsString.length(), 1000));
+        } catch (IOException e) {
+            Log.e(tag, e.getLocalizedMessage());
+            return String.format("MESSAGE: %s UUID : %s ", message, uuid);
         }
     }
 

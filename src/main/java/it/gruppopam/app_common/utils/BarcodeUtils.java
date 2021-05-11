@@ -61,7 +61,7 @@ public final class BarcodeUtils {
     }
 
     public static boolean isRightBarcodeType(String inputType, BarcodeType type) {
-        if (inputType != null && !inputType.equals("") && type != null) {
+        if (inputType != null && !"".equals(inputType) && type != null) {
             return inputType.equals(type.getLabelName());
         } else {
             return false;
