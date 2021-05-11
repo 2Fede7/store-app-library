@@ -1,6 +1,6 @@
 package it.gruppopam.app_common.utils;
 
-//@SuppressWarnings("PMD.ClassNamingConventions")
+@SuppressWarnings("PMD.ClassNamingConventions")
 public final class AppConstants {
 
     public static final int ARTICLE_ID_BARCODE_LENGTH_6 = 6;

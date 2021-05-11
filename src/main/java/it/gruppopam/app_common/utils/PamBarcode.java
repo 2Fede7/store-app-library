@@ -2,7 +2,8 @@ package it.gruppopam.app_common.utils;
 
 import javax.inject.Inject;
 
-import static it.gruppopam.app_common.utils.AppConstants.*;
+import static it.gruppopam.app_common.utils.AppConstants.ARTICLE_ID_BARCODE_LENGTH_8;
+import static it.gruppopam.app_common.utils.AppConstants.ARTICLE_ID_MAX_LENGTH;
 
 public class PamBarcode extends BaseEan8Barcode {
 

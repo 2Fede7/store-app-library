@@ -19,6 +19,4 @@ public class AlarmFiringDefault {
 
         return startTime;
     }
-
-
 }

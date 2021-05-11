@@ -17,7 +17,6 @@ public class IOUtilsTest {
 
         } catch (IOException e) {
             fail();
-            e.printStackTrace();
         }
     }
 }

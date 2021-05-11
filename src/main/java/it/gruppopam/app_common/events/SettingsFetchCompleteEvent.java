@@ -2,7 +2,7 @@ package it.gruppopam.app_common.events;
 
 public class SettingsFetchCompleteEvent {
 
-    public Result result;
+    private Result result;
 
     public SettingsFetchCompleteEvent(Result result) {
         this.result = result;

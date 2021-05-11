@@ -1,0 +1,106 @@
+<?xml version="1.0" ?>
+
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+    "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+
+<!-- Checkstyle checks http://checkstyle.sourceforge.net/checks.html -->
+<module name="Checker">
+    <module name="TreeWalker">
+        <module name="ArrayTypeStyle" />
+        <module name="AvoidNestedBlocks">
+            <property name="allowInSwitchCase" value="true" />
+        </module>
+        <module name="BooleanExpressionComplexity">
+            <property name="max" value="7" />
+        </module>
+        <module name="ClassDataAbstractionCoupling">
+            <!-- STANDARD VALUE IS <property name="max" value="12"/>-->
+            <property name="max" value="10" />
+        </module>
+        <module name="ClassFanOutComplexity">
+            <!-- STANDARD VALUE IS <property name="max" value="33"/>-->
+            <property name="max" value="33" />
+        </module>
+        <module name="CovariantEquals" />
+        <module name="CyclomaticComplexity">
+            <!-- STANDARD VALUE IS <property name="max" value="8"/>-->
+            <property name="max" value="7" />
+        </module>
+        <!--module name="DeclarationOrder" /-->
+        <module name="DefaultComesLast" />
+        <module name="EmptyLineSeparator">
+            <property name="tokens" value="METHOD_DEF" />
+            <property name="allowMultipleEmptyLines" value="false" />
+        </module>
+        <module name="EmptyStatement" />
+        <module name="EqualsAvoidNull" />
+        <module name="EqualsHashCode" />
+        <module name="ExecutableStatementCount">
+            <!-- STANDARD VALUE IS <property name="max" value="25"/>-->
+            <property name="max" value="25" />
+            <property name="tokens" value="CTOR_DEF,METHOD_DEF" />
+        </module>
+        <module name="FallThrough" />
+        <module name="FinalClass" />
+
+        <module name="HideUtilityClassConstructor" />
+        <!-- <module name="Indentation"/> -->
+        <module name="InnerAssignment" />
+        <module name="InnerTypeLast" />
+        <module name="JavaNCSS">
+            <!-- STANDARD VALUE IS <property name="methodMaximum" value="26"/>-->
+            <property name="methodMaximum" value="26" />
+        </module>
+        <module name="LeftCurly" />
+        <module name="LineLength">
+            <!-- STANDARD VALUE IS <property name="max" value="250"/>-->
+            <property name="max" value="200" />
+        </module>
+        <!-- <module name="MagicNumber"/> -->
+        <module name="ModifiedControlVariable" />
+        <!-- <module name="MultipleStringLiterals"/> -->
+        <module name="MultipleVariableDeclarations" />
+        <!-- <module name="NeedBraces"/> -->
+        <module name="NPathComplexity">
+            <!-- STANDARD VALUE IS <property name="max" value="10"/>-->
+            <property name="max" value="7" />
+        </module>
+        <module name="OneStatementPerLine" />
+        <module name="OneTopLevelClass" />
+        <module name="OuterTypeFilename" />
+        <module name="OverloadMethodsDeclarationOrder" />
+        <module name="PackageName">
+            <property name="format" value="^[a-z]+(\.[a-z][a-z0-9_]*)*$" />
+        </module>
+        <module name="ParameterAssignment" />
+        <module name="ParenPad" />
+        <module name="RedundantImport" />
+        <module name="RedundantModifier" />
+        <module name="RightCurly" />
+        <module name="SimplifyBooleanReturn" />
+        <module name="StringLiteralEquality" />
+        <module name="SuperClone" />
+        <module name="SuperFinalize" />
+        <!-- Make the @SuppressWarnings annotations available to Checkstyle -->
+        <module name="SuppressWarningsHolder" />
+        <module name="TypecastParenPad" />
+        <module name="UnnecessaryParentheses" />
+        <module name="UnusedImports" />
+        <module name="VisibilityModifier">
+            <property name="packageAllowed" value="true" />
+            <property name="protectedAllowed" value="true" />
+        </module>
+        <module name="WhitespaceAfter" />
+        <module name="WhitespaceAround" />
+    </module>
+    <module name="FileLength">
+        <!-- STANDARD VALUE IS <property name="max" value="300"/>-->
+        <property name="max" value="300" />
+    </module>
+    <module name="NewlineAtEndOfFile" />
+    <module name="SuppressionFilter">
+        <property name="file" value="config/checkstyle/checkstyle-suppressions.xml" />
+    </module>
+    <module name="SuppressWarningsFilter" />
+</module>
