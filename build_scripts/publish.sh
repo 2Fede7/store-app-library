@@ -1,3 +1,3 @@
 #!/bin/bash -el
 
-./gradlew clean artifactoryPublish --info
+./gradlew clean check artifactoryPublish --info
