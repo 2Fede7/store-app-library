@@ -1,15 +1,15 @@
 apply plugin: 'org.stoyicker.android-check'
-apply plugin: 'com.chaitanyapramod.findbugs-android'
+//apply plugin: 'com.chaitanyapramod.findbugs-android'
 
 check {
     abortOnError true
-    findbugs {
-        toolVersion '3.0.1'
-        ignoreFailures false
-        effort 'max'
-        reportLevel 'high'
-        excludeBugsFilter rootProject.file("config/findbugs/excludeFilter.xml")
-    }
+//    findbugs {
+//        toolVersion '3.0.1'
+//        ignoreFailures false
+//        effort 'max'
+//        reportLevel 'high'
+//        excludeBugsFilter rootProject.file("config/findbugs/excludeFilter.xml")
+//    }
     checkstyle {
         config rootProject.file("config/checkstyle/checkstyle.xml")
         reportHTML new File(rootDir, "test_artifacts/checkstyle-${project.name}.html")

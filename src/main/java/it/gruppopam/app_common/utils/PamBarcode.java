@@ -14,7 +14,7 @@ public class PamBarcode extends BaseEan8Barcode {
     @Override
     public boolean isValid(String barcode) {
         return barcode.length() == ARTICLE_ID_BARCODE_LENGTH_8
-            && getCheckDigitNumber(barcode) == calculateCheckDigit(barcode);
+                && getCheckDigitNumber(barcode) == calculateCheckDigit(barcode);
     }
 
     @Override

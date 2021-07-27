@@ -22,7 +22,7 @@ public abstract class PullJob extends BaseJob {
         this.storeId = storeId;
     }
 
-    public void initialize(Long storeId){
+    public void initialize(Long storeId) {
         this.storeId = storeId;
     }
 
@@ -36,7 +36,8 @@ public abstract class PullJob extends BaseJob {
         postSync();
     }
 
-    protected void preSync() {}
+    protected void preSync() {
+    }
 
     protected abstract Response sync() throws Throwable;
 

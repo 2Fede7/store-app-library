@@ -23,21 +23,21 @@ public abstract class BaseHeadersInterceptor implements Interceptor {
 
     @Inject
     public BaseHeadersInterceptor(@ForApplication Context applicationContext,
-                                    String cliendHeaderVal) {
+                                  String cliendHeaderVal) {
         this.context = applicationContext;
         this.cliendHeaderVal = cliendHeaderVal;
     }
 
     protected Request.Builder buildRequestInterceptor(Request originalRequest, String uuid, String deviceId, String username, Long storeId, String versionId, String versionType) {
         Request.Builder builder = originalRequest.newBuilder()
-            .header(REQUEST_HEADER, uuid)
-            .header(USERNAME_HEADER, username)
-            .header(CLIENT_HEADER, cliendHeaderVal)
-            .header(DEVICE_ID_HEADER, deviceId != null ? deviceId : UNKNOWN_DEVICE_ID)
-            .header(STORE_ID_HEADER, String.valueOf(storeId))
-            .header(VERSION_ID_HEADER, versionId)
-            .header(VERSION_TYPE_HEADER, versionType)
-            .method(originalRequest.method(), originalRequest.body());
+                .header(REQUEST_HEADER, uuid)
+                .header(USERNAME_HEADER, username)
+                .header(CLIENT_HEADER, cliendHeaderVal)
+                .header(DEVICE_ID_HEADER, deviceId != null ? deviceId : UNKNOWN_DEVICE_ID)
+                .header(STORE_ID_HEADER, String.valueOf(storeId))
+                .header(VERSION_ID_HEADER, versionId)
+                .header(VERSION_TYPE_HEADER, versionType)
+                .method(originalRequest.method(), originalRequest.body());
 
         return builder;
     }

@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 group = 'it.gruppopam.android'
-version = '1.0.14'
+version = '1.0.16'
 description = 'Android library for store apps'
 
 buildscript {
@@ -16,10 +16,10 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.android.tools.build:gradle:4.0.2'
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:3.2.0"
         classpath "org.stoyicker.android-check:plugin:2.292"
-        classpath "com.chaitanyapramod.gradle:findbugs-android:1.0"
+//        classpath "com.chaitanyapramod.gradle:findbugs-android:1.0"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -64,17 +64,28 @@ apply plugin: "com.jfrog.artifactory"
 apply from: "$rootProject.projectDir/quality.gradle"
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 30
+    buildToolsVersion "29.0.3"
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        testInstrumentationRunnerArguments clearPackageData: 'true'
+
         consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
     }
 
     buildTypes {
@@ -95,7 +106,7 @@ android {
 
     libraryVariants.all { variant ->
         variant.outputs.each { output ->
-            output.outputFile = rootProject.file("artifacts/store-app-library-${version}-${variant.name}.aar")
+            output.outputFileName = "artifacts/store-app-library-${version}-${variant.name}.aar"
         }
 
     }
@@ -146,6 +157,10 @@ android {
                 }
             }
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 

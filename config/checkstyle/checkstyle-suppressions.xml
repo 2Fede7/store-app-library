@@ -49,6 +49,7 @@
     <suppress checks="[DeclarationOrder]"  files="SuggestionsFilterDialogFragment.java" />
     <suppress checks="[VisibilityModifier]"  files="PullJob.java" />
     <suppress checks="[VisibilityModifier]"  files="PushJob.java" />
+    <suppress checks="[ExecutableStatementCountCheck]" files="ArticleMapper.java" />
 
     <!-- Test & Generated Files -->
     <suppress checks="[FileLength]" files="ModelTestUtils.java" />

@@ -14,7 +14,7 @@ public class Ean13Barcode extends BaseEan13Barcode {
     @Override
     public boolean isValid(String barcode) {
         return barcode.length() == ARTICLE_ID_BARCODE_LENGTH_13
-            && getCheckDigitNumber(barcode) == calculateCheckDigit(barcode);
+                && getCheckDigitNumber(barcode) == calculateCheckDigit(barcode);
     }
 
     @Override
