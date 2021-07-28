@@ -106,7 +106,7 @@ android {
 
     libraryVariants.all { variant ->
         variant.outputs.each { output ->
-            output.outputFileName = "artifacts/store-app-library-${version}-${variant.name}.aar"
+            output.outputFileName = "build/outputs/aar/artifacts/store-app-library-${version}-${variant.name}.aar"
         }
 
     }
