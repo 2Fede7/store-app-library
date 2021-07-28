@@ -106,7 +106,7 @@ android {
 
     libraryVariants.all { variant ->
         variant.outputs.each { output ->
-            output.outputFileName = "build/outputs/aar/artifacts/store-app-library-${version}-${variant.name}.aar"
+            output.outputFileName = "artifacts/store-app-library-${version}-${variant.name}.aar"
         }
 
     }
@@ -125,7 +125,7 @@ android {
                 // Creates a Maven publication called "aar".
                 aar(MavenPublication) {
                     // Applies the component for the release build variant.
-                    artifact("artifacts/store-app-library-${version}-release.aar")
+                    artifact("build/outputs/aar/artifacts/store-app-library-${version}-release.aar")
                 }
             }
         }
