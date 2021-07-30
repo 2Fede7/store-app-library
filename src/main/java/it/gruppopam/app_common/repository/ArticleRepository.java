@@ -20,6 +20,7 @@ import it.gruppopam.app_common.model.entity.ArticleSupplierLine;
 import it.gruppopam.app_common.model.entity.Promotion;
 import it.gruppopam.app_common.model.entity.SubstituteArticle;
 import it.gruppopam.app_common.model.relations.ArticleWithRelations;
+import it.gruppopam.app_common.model.relations.ArticleWithRelationsAndBarcode;
 
 import static com.annimon.stream.Collectors.toList;
 import static it.gruppopam.app_common.utils.CollectionUtils.isEmpty;
@@ -132,6 +133,10 @@ public class ArticleRepository extends BaseRepository<Article> implements Persis
 
     public ArticleWithRelations find(Long articleId) {
         return articleDao.findArticleWithRelationsByArticleId(articleId);
+    }
+
+    public ArticleWithRelationsAndBarcode findWithBarcode(Long articleId) {
+        return articleDao.findArticleWithRelationsAndBarcodeByArticleId(articleId);
     }
 
     public Article findByArticleId(Long articleId) {
