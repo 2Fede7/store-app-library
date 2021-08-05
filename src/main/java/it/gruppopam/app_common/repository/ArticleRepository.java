@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import it.gruppopam.app_common.dao.ArticleDao;
 import it.gruppopam.app_common.dao.ArticleOrderBlockDao;
 import it.gruppopam.app_common.dao.ArticleSupplierLineDao;
+import it.gruppopam.app_common.dao.CostAndDiscountDao;
 import it.gruppopam.app_common.dao.PromotionDao;
 import it.gruppopam.app_common.dao.SubstituteArticleDao;
 import it.gruppopam.app_common.model.OrderOption;
@@ -20,6 +21,7 @@ import it.gruppopam.app_common.model.entity.ArticleSupplierLine;
 import it.gruppopam.app_common.model.entity.Promotion;
 import it.gruppopam.app_common.model.entity.SubstituteArticle;
 import it.gruppopam.app_common.model.relations.ArticleWithRelations;
+import it.gruppopam.app_common.model.relations.ArticleWithRelationsAndBarcode;
 
 import static com.annimon.stream.Collectors.toList;
 import static it.gruppopam.app_common.utils.CollectionUtils.isEmpty;
@@ -33,17 +35,19 @@ public class ArticleRepository extends BaseRepository<Article> implements Persis
     private ArticleSupplierLineDao articleSupplierLineDao;
     private ArticleOrderBlockDao articleOrderBlockDao;
     private SubstituteArticleDao substituteArticleDao;
+    private CostAndDiscountDao costAndDiscountDao;
 
     @Inject
     public ArticleRepository(TransactionManager transactionManager, ArticleDao articleDao, PromotionDao promotionDao,
                              ArticleSupplierLineDao articleSupplierLineDao, ArticleOrderBlockDao articleOrderBlockDao,
-                             SubstituteArticleDao substituteArticleDao) {
+                             SubstituteArticleDao substituteArticleDao, CostAndDiscountDao costAndDiscountDao) {
         super(transactionManager, articleDao);
         this.articleDao = articleDao;
         this.promotionDao = promotionDao;
         this.articleSupplierLineDao = articleSupplierLineDao;
         this.articleOrderBlockDao = articleOrderBlockDao;
         this.substituteArticleDao = substituteArticleDao;
+        this.costAndDiscountDao = costAndDiscountDao;
     }
 
     public void save(List<ArticleWithRelations> articleWrappers) {
@@ -69,6 +73,11 @@ public class ArticleRepository extends BaseRepository<Article> implements Persis
             }
             if (articleWrapper.getSubstituteArticle() != null) {
                 substituteArticleDao.save(articleWrapper.getSubstituteArticle());
+            }
+            if (!isEmpty(articleWrapper.getCostAndDiscount())) {
+                costAndDiscountDao.save(Stream.of(articleWrapper.getCostAndDiscount())
+                        .peek(aob -> aob.setArticleId(articleId))
+                        .collect(toList()));
             }
             return articleId;
         });
@@ -163,6 +172,10 @@ public class ArticleRepository extends BaseRepository<Article> implements Persis
     public List<Article> findByBarcode(String barcode, int resultLimit) {
         return select("select * from articles art " +
                 "join barcode b on art.article_id = b.article_id where barcode = ? order by name limit ?", barcode, resultLimit);
+    }
+
+    public ArticleWithRelationsAndBarcode findWithBarcode(Long articleId) {
+        return articleDao.findArticleWithRelationsAndBarcodeByArticleId(articleId);
     }
 
     public List<Promotion> getActiveAndFuturePromotions(Long articleId) {

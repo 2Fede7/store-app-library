@@ -13,6 +13,7 @@ import java.util.List;
 
 import it.gruppopam.app_common.model.entity.Article;
 import it.gruppopam.app_common.model.relations.ArticleWithRelations;
+import it.gruppopam.app_common.model.relations.ArticleWithRelationsAndBarcode;
 
 import static it.gruppopam.app_common.model.entity.Article.ARTICLES_TABLE;
 import static it.gruppopam.app_common.utils.AppConstants.COUNT_FROM;
@@ -61,6 +62,10 @@ public interface ArticleDao extends IDao<Article> {
     @Transaction
     @Query(SELECT_ARTICLE_BY_ARTICLE_ID_QUERY)
     ArticleWithRelations findArticleWithRelationsByArticleId(Long arg0);
+
+    @Transaction
+    @Query(SELECT_ARTICLE_BY_ARTICLE_ID_QUERY)
+    ArticleWithRelationsAndBarcode findArticleWithRelationsAndBarcodeByArticleId(Long arg0);
 
     @Transaction
     @Query(SELECT_ARTICLE_BY_ARTICLE_ID_QUERY)

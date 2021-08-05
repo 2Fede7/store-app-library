@@ -12,6 +12,7 @@ import com.annimon.stream.Stream;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +34,7 @@ import static com.annimon.stream.Collectors.toList;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity(tableName = Article.ARTICLES_TABLE, indices = {@Index(value = {"article_id"}, unique = true)}, inheritSuperIndices = true)
-public class Article {
+public class Article implements Serializable {
     public static final String ARTICLES_TABLE = "articles";
 
     @ColumnInfo(name = "department_id")
