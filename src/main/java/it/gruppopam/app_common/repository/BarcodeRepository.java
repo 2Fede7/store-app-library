@@ -3,6 +3,7 @@ package it.gruppopam.app_common.repository;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -86,13 +87,47 @@ public class BarcodeRepository extends BaseRepository<Barcode> implements Persis
     }
 
     public Barcode findLatestByBarcode(String barcode) {
-        Calendar now = GregorianCalendar.getInstance();
-        now.set(Calendar.HOUR, 0);
-        now.set(Calendar.MINUTE, 0);
-        now.set(Calendar.SECOND, 0);
-        now.set(Calendar.MILLISECOND, 0);
-        List<Barcode> barcodes = select("select * from barcode where barcode = ? and start_date <= ? and end_date >= ? " +
-                "order by start_date desc", barcode, now.getTimeInMillis(), now.getTimeInMillis());
-        return barcodes != null && barcodes.size() >= 1 ? barcodes.get(0) : null;
+        List<Barcode> barcodes = select("select * from barcode where barcode = ? " +
+                "order by start_date desc", barcode);
+
+        Barcode result = null;
+
+        boolean nonActive = isNonActive(barcodes);
+        Iterator<Barcode> iter;
+
+        iter = barcodes.iterator();
+
+        while (iter.hasNext() && result == null) {
+            Barcode b = iter.next();
+            result = getBarcode(nonActive, b);
+        }
+
+        return result;
+    }
+
+    private Barcode getBarcode(boolean nonActive, Barcode b) {
+        Barcode result = null;
+        if (nonActive) {
+            if (!b.isActive()) {
+                result = b;
+            }
+        } else {
+            if (b.isActive()) {
+                result = b;
+            }
+        }
+        return result;
+    }
+
+    private boolean isNonActive(List<Barcode> barcodes) {
+        boolean nonActive = true;
+        Iterator<Barcode> iter = barcodes.iterator();
+        while (iter.hasNext() && nonActive) {
+            Barcode b = iter.next();
+            if (b.isActive()) {
+                nonActive = false;
+            }
+        }
+        return nonActive;
     }
 }
