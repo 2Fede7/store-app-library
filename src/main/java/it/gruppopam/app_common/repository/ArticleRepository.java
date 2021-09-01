@@ -92,6 +92,7 @@ public class ArticleRepository extends BaseRepository<Article> implements Persis
         purgeArticleOrderBlocks(articleId);
         purgeArticlePromotions(articleId);
         purgeArticleSupplierLines(articleId);
+        purgeSubstituteArticles(articleId);
     }
 
     public void truncateTable() {
@@ -253,6 +254,10 @@ public class ArticleRepository extends BaseRepository<Article> implements Persis
         deleteQuery("delete from promotions where article_id = ?", articleId);
     }
 
+    public void purgeSubstituteArticles(Long articleId) {
+        deleteQuery("delete from substitute_article where article_id = ?", articleId);
+    }
+
     public SubstituteArticle getSubstituteBy(Long substituteArticleId) {
         return substituteArticleDao.select(buildQuery("select * from substitute_article where substitute_article_id=?", substituteArticleId));
     }
@@ -262,7 +267,7 @@ public class ArticleRepository extends BaseRepository<Article> implements Persis
         if (substituteArticle == null) {
             return substituteByArticle;
         }
-        return getLastSubstituteBy(substituteArticle);
+        return substituteArticle;
     }
 
     public SubstituteArticle getSubstitutedArticle(Long articleId) {
