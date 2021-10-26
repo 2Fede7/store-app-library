@@ -2,9 +2,12 @@ package it.gruppopam.app_common.network.api;
 
 import java.util.HashMap;
 
+import it.gruppopam.app_common.dto.OnBoardDeviceDto;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -22,5 +25,8 @@ public interface DeviceAppManagerApi {
 
     @GET("devices/{deviceId}/whitelist")
     Call<Boolean> isDeviceWhitelisted(@Path("deviceId") String deviceId);
+
+    @POST("devices/{deviceId}/onboard")
+    Call<ResponseBody> onBoardDeviceSynchronous(@Path("deviceId") String deviceId, @Body OnBoardDeviceDto onBoardDeviceDto);
 
 }
