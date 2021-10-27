@@ -199,4 +199,17 @@ public class Article implements Serializable {
     private boolean isMeasurementType(Character measurementType) {
         return this.getMeasurementUnitType() != null && this.getMeasurementUnitType().equals(measurementType);
     }
+
+    public boolean isSoldOnPieces(){
+        return isSoldOn('1');
+    }
+
+    public boolean isSoldOnPackagedWeight(){
+        return isSoldOn('2');
+    }
+
+    private boolean isSoldOn(Character saleType){
+        return this.getSaleType() != null && this.getSaleType().equals(saleType);
+    }
+
 }
