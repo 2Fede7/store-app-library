@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 
 import it.gruppopam.app_common.network.api.DeviceAppManagerApi;
@@ -13,6 +15,7 @@ import retrofit2.Response;
 
 import static it.gruppopam.app_common.utils.AppVersionUtil.DESIRED_VERSION_ID;
 import static it.gruppopam.app_common.utils.AppVersionUtil.DESIRED_VERSION_TYPE;
+import static it.gruppopam.app_common.utils.AppVersionUtil.STORE_UTILITIES_APP;
 
 public abstract class CheckForUpdateAsyncTask extends AsyncTask<Void, String, CheckForUpdateAsyncTask.VersionCheck> {
 
@@ -61,20 +64,18 @@ public abstract class CheckForUpdateAsyncTask extends AsyncTask<Void, String, Ch
 
         try {
             Response<ResponseBody> response;
+            // Todo: Remove this section and restore line 72 after Store Utilities App EDGE will be released
+            if (STORE_UTILITIES_APP.equals(app)) {
+                response = deviceAppManagerApi.validateApkVersion(currentVersionId).execute();
+            } else {
+                response = deviceAppManagerApi.validateApkVersion(storeId, app, currentVersionType, currentVersionId).execute();
+            }
 
-            response = deviceAppManagerApi.validateApkVersion(storeId, app, currentVersionType, currentVersionId).execute();
+//            response = deviceAppManagerApi.validateApkVersion(storeId, app, currentVersionType, currentVersionId).execute();
 
             if (AppVersionUtil.isResponseValid(app, response)) {
 
-                int versionId = Integer.parseInt(response.raw().headers().get(DESIRED_VERSION_ID));
-                String versionType = response.raw().headers().get(DESIRED_VERSION_TYPE);
-                appVersionDetail = new AppVersionDetail(app, storeId, versionType, versionId);
-
-                if (!response.isSuccessful()) {
-                    Log.e(TAG, "WRONG APP VERSION");
-                    return VersionCheck.KO;
-                }
-                return VersionCheck.OK;
+                return getVersionIsCorrect(response);
             }
 
             // unable to get valid response
@@ -84,6 +85,19 @@ public abstract class CheckForUpdateAsyncTask extends AsyncTask<Void, String, Ch
             Log.e(TAG, e.getMessage());
             return VersionCheck.NA;
         }
+    }
+
+    @NotNull
+    private VersionCheck getVersionIsCorrect(Response<ResponseBody> response) {
+        int versionId = Integer.parseInt(response.raw().headers().get(DESIRED_VERSION_ID));
+        String versionType = response.raw().headers().get(DESIRED_VERSION_TYPE);
+        appVersionDetail = new AppVersionDetail(app, storeId, versionType, versionId);
+
+        if (!response.isSuccessful()) {
+            Log.e(TAG, "WRONG APP VERSION");
+            return VersionCheck.KO;
+        }
+        return VersionCheck.OK;
     }
 
     public enum VersionCheck {

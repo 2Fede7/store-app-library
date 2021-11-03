@@ -19,6 +19,9 @@ public interface DeviceAppManagerApi {
     @GET("settings")
     HashMap<String, String> getSettingsSynchronous(@Query("store_id") Long storeId);
 
+    @GET("store_utilities_app/apk/validate")
+    Call<ResponseBody> validateApkVersion(@Query("current_version") Long currentVersion);
+
     @GET("apk/stores/{store_id}/{app_name}/{version_type}/validate")
     Call<ResponseBody> validateApkVersion(@Path("store_id") Long storeId, @Path("app_name") String appName,
                                           @Path("version_type") String validationTYpe, @Query("current_version") Long currentVersion);
