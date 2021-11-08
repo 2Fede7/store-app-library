@@ -212,4 +212,11 @@ public class Article implements Serializable {
         return this.getSaleType() != null && this.getSaleType().equals(saleType);
     }
 
+    public boolean isActiveSafe() {
+        return active != null && active;
+    }
+
+    public boolean isReplenishmentStatusSafe() {
+        return replenishmentStatus != null && replenishmentStatus;
+    }
 }
