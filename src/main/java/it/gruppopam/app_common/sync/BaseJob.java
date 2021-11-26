@@ -1,7 +1,5 @@
 package it.gruppopam.app_common.sync;
 
-import android.app.Application;
-
 import androidx.annotation.Nullable;
 
 import com.birbit.android.jobqueue.Job;
@@ -53,5 +51,4 @@ public abstract class BaseJob extends Job {
         return retryConstraint;
     }
 
-    public abstract void inject(Application application);
 }
