@@ -19,6 +19,7 @@ public interface DeviceAppManagerApi {
     @GET("settings")
     HashMap<String, String> getSettingsSynchronous(@Query("store_id") Long storeId);
 
+    // TODO: Remove when all stores has the new version on Store Utilities app
     @GET("store_utilities_app/apk/validate")
     Call<ResponseBody> validateApkVersion(@Query("current_version") Long currentVersion);
 

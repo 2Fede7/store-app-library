@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 group = 'it.gruppopam.android'
-version = '1.0.20'
+version = '1.0.21'
 description = 'Android library for store apps'
 
 buildscript {
@@ -69,6 +69,7 @@ android {
 
     defaultConfig {
         minSdkVersion 21
+        //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
