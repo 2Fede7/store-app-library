@@ -1,7 +1,7 @@
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.birbit:android-priority-jobqueue:2.0.1'
+    implementation 'com.birbit:android-priority-jobqueue:3.0.0'
     implementation 'ch.acra:acra:4.11'
     implementation 'joda-time:joda-time:2.10.10'
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
