@@ -27,9 +27,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Delegate;
 
+import static com.annimon.stream.Collectors.toList;
 import static it.gruppopam.app_common.utils.AppConstants.DEFAULT_QUANTITY;
 import static it.gruppopam.app_common.utils.AppConstants.DEFAULT_WEIGHT_UNIT;
 import static it.gruppopam.app_common.utils.CollectionUtils.isEmpty;
+import static it.gruppopam.app_common.utils.DateUtils.isAfterOrEquals;
+import static it.gruppopam.app_common.utils.DateUtils.isBeforeOrEquals;
 import static it.gruppopam.app_common.utils.DateUtils.todayStartOfDay;
 
 @Getter
@@ -113,6 +116,17 @@ public class ArticleWithRelations {
             }
         }
         return futurePromotions;
+    }
+
+    public List<ArticleOrderBlock> getActiveArticleOrderBlocks() {
+        return Stream.of(articleOrderBlocks)
+                .filter(this::isActiveArticleOrderBlock)
+                .collect(toList());
+    }
+
+    private boolean isActiveArticleOrderBlock(ArticleOrderBlock articleOrderBlock) {
+        return isBeforeOrEquals(articleOrderBlock.getStartDateBlock(), todayStartOfDay()) &&
+                (articleOrderBlock.getEndDateBlock() == null || isAfterOrEquals(articleOrderBlock.getEndDateBlock(), todayStartOfDay()));
     }
 
     public String getArticleDescription() {

@@ -111,4 +111,12 @@ final public class DateUtils {
     public String formatDate(Date date) {
         return dateFormat.format(date);
     }
+
+    public static boolean isBeforeOrEquals(Date dateToCompare, Date comparedDate) {
+        return dateToCompare.before(comparedDate) || dateToCompare.equals(comparedDate);
+    }
+
+    public static boolean isAfterOrEquals(Date dateToCompare, Date comparedDate) {
+        return dateToCompare.after(comparedDate) || dateToCompare.equals(comparedDate);
+    }
 }
