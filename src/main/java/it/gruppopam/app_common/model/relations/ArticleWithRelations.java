@@ -125,8 +125,8 @@ public class ArticleWithRelations {
     }
 
     private boolean isActiveArticleOrderBlock(ArticleOrderBlock articleOrderBlock) {
-        return isBeforeOrEquals(articleOrderBlock.getStartDateBlock(), todayStartOfDay()) &&
-                (articleOrderBlock.getEndDateBlock() == null || isAfterOrEquals(articleOrderBlock.getEndDateBlock(), todayStartOfDay()));
+        return isBeforeOrEquals(DateUtils.truncateTime(articleOrderBlock.getStartDateBlock()), todayStartOfDay()) &&
+                (articleOrderBlock.getEndDateBlock() == null || isAfterOrEquals(DateUtils.truncateTime(articleOrderBlock.getEndDateBlock()), todayStartOfDay()));
     }
 
     public String getArticleDescription() {
