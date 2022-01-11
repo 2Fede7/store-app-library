@@ -41,4 +41,15 @@ public abstract class BaseHeadersInterceptor implements Interceptor {
 
         return builder;
     }
+
+    protected Request.Builder buildRequestInterceptor(Request originalRequest, String uuid, String deviceId, String username, Long storeId) {
+        Request.Builder builder = originalRequest.newBuilder()
+                .header(REQUEST_HEADER, uuid)
+                .header(USERNAME_HEADER, username)
+                .header(CLIENT_HEADER, cliendHeaderVal)
+                .header(DEVICE_ID_HEADER, deviceId != null ? deviceId : UNKNOWN_DEVICE_ID)
+                .header(STORE_ID_HEADER, String.valueOf(storeId))
+                .method(originalRequest.method(), originalRequest.body());
+        return builder;
+    }
 }
