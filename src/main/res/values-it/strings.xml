@@ -55,4 +55,21 @@
     <string name="non_food_xd_logistic_option_subtitle">ORDINI XD</string>
     <string name="non_food_direct_logistic_option_subtitle">ORDINI DIRETTI</string>
 
+
+    <!--CONFIGURATION-->
+    <string name="configuration_steps">Procedura di configurazione</string>
+    <string name="step_store_setting">Impostazione ID negozio</string>
+    <string name="step_retrieve_device_settings">Recupero anagrafica negozio</string>
+    <string name="step_first_user_login">Configurazione account utente</string>
+    <string name="step_sync_all_data">Avvio sincronizzazione dati</string>
+    <string name="step_onboard_device">Registrazione dispositivo su Order Platform</string>
+    <string name="step_finalize_configuration">Finalizzazione procedura</string>
+    <string name="configuration_waiting">"{fa-spinner}"</string>
+    <string name="configuration_ko">"{fa-remove}"</string>
+    <string name="configuration_ok">"{fa-check}"</string>
+    <string name="store_missing_error">Il Codice dello Store non è presente!</string>
+    <string name="toolbar_store">ID NEGOZIO: </string>
+    <string name="wait_for_configuration_completion">Attendi il completamento della configurazione automatica</string>
+    <string name="wait_for_configuration_completion_or">oppure</string>
+    <string name="manual_configuration">Procedi con la configurazione manuale</string>
 </resources>

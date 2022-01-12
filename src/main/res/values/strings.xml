@@ -55,4 +55,22 @@
     <string name="non_food_xd_logistic_option_subtitle">XD ORDERS</string>
     <string name="non_food_direct_logistic_option_subtitle">DIRECT ORDERS</string>
 
+
+    <!--CONFIGURATION-->
+    <string name="configuration_steps">Configuration Steps</string>
+    <string name="step_store_setting">Setting Store id</string>
+    <string name="step_retrieve_device_settings">Retrieve Store Configuration</string>
+    <string name="step_first_user_login">Configure User Login Information</string>
+    <string name="step_sync_all_data">Start Data Pull</string>
+    <string name="step_onboard_device">Onboard Device on Order Platform</string>
+    <string name="step_finalize_configuration">Finalize Configuration</string>
+    <string name="configuration_waiting">"{fa-spinner}"</string>
+    <string name="configuration_ko">"{fa-remove}"</string>
+    <string name="configuration_ok">"{fa-check}"</string>
+    <string name="store_missing_error">Store Id is not present!</string>
+    <string name="toolbar_store">STORE ID: </string>
+    <string name="wait_for_configuration_completion">Wait for the automatic configuration to complete</string>
+    <string name="wait_for_configuration_completion_or">or</string>
+    <string name="manual_configuration">Continue with manual configuration</string>
+
 </resources>
