@@ -1,11 +1,5 @@
 package it.gruppopam.app_common.utils;
 
-import static it.gruppopam.app_common.utils.AppVersionUtil.DESIRED_VERSION_ID;
-import static it.gruppopam.app_common.utils.CommonAppPreferences.PrefKeys.ARE_PULL_JOBS_ENABLED;
-import static it.gruppopam.app_common.utils.CommonAppPreferences.PrefKeys.ENABLED_STORES_NUMBER;
-import static it.gruppopam.app_common.utils.CommonAppPreferences.PrefKeys.STORE_ID_KEY;
-import static it.gruppopam.app_common.utils.CommonAppPreferences.PrefKeys.STORE_ORDINAL_NUMBER;
-
 import android.content.SharedPreferences;
 
 import java.util.HashMap;
@@ -15,15 +9,22 @@ import it.gruppopam.app_common.model.User;
 import it.gruppopam.app_common.model.Users;
 import it.gruppopam.app_common.service.configurations.ConfigurationStepName;
 
+import static it.gruppopam.app_common.utils.AppVersionUtil.DESIRED_VERSION_ID;
+import static it.gruppopam.app_common.utils.CommonAppPreferences.PrefKeyUtils.ARE_PULL_JOBS_ENABLED;
+import static it.gruppopam.app_common.utils.CommonAppPreferences.PrefKeyUtils.ARE_PUSH_JOBS_ENABLED;
+import static it.gruppopam.app_common.utils.CommonAppPreferences.PrefKeyUtils.ENABLED_STORES_NUMBER;
+import static it.gruppopam.app_common.utils.CommonAppPreferences.PrefKeyUtils.STORE_ID_KEY;
+import static it.gruppopam.app_common.utils.CommonAppPreferences.PrefKeyUtils.STORE_INSEGNA;
+import static it.gruppopam.app_common.utils.CommonAppPreferences.PrefKeyUtils.STORE_ORDINAL_NUMBER;
+
 public abstract class CommonAppPreferences {
 
     private static final long STORE_ID_NOT_PRESENT = -1L;
-    private final SharedPreferences sharedPreferences;
+    protected final SharedPreferences sharedPreferences;
 
     public CommonAppPreferences(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
     }
-
 
     public Integer getStoreOrdinalNumber() {
         String storeOrdinalNumber = sharedPreferences.getString(STORE_ORDINAL_NUMBER, null);
@@ -57,11 +58,11 @@ public abstract class CommonAppPreferences {
     }
 
     public void setCurrentAppVersionId(Long versionId) {
-        sharedPreferences.edit().putLong(PrefKeys.CURRENT_VERSION_ID, versionId).apply();
+        sharedPreferences.edit().putLong(PrefKeyUtils.CURRENT_VERSION_ID, versionId).apply();
     }
 
     public void setCurrentAppVersionType(String versionType) {
-        sharedPreferences.edit().putString(PrefKeys.CURRENT_VERSION_TYPE, versionType).apply();
+        sharedPreferences.edit().putString(PrefKeyUtils.CURRENT_VERSION_TYPE, versionType).apply();
     }
 
     public int getDesiredAppVersionId() {
@@ -69,34 +70,33 @@ public abstract class CommonAppPreferences {
     }
 
     public void setShouldIgnoreProfile(boolean shouldIgnoreProfile) {
-        sharedPreferences.edit().putBoolean(PrefKeys.SHOULD_IGNORE_PROFILE, shouldIgnoreProfile).apply();
+        sharedPreferences.edit().putBoolean(PrefKeyUtils.SHOULD_IGNORE_PROFILE, shouldIgnoreProfile).apply();
     }
 
-
     public void createAdminUser(String userName, String password) {
-        sharedPreferences.edit().putString(PrefKeys.ADMIN_USER_NAME, userName)
-                .putString(PrefKeys.ADMIN_USER_PASSWORD, password)
+        sharedPreferences.edit().putString(PrefKeyUtils.ADMIN_USER_NAME, userName)
+                .putString(PrefKeyUtils.ADMIN_USER_PASSWORD, password)
                 .apply();
     }
 
     public void createStoreUser(String userName, String password) {
-        sharedPreferences.edit().putString(PrefKeys.STORE_USER_NAME, userName)
-                .putString(PrefKeys.STORE_USER_PASSWORD, password)
+        sharedPreferences.edit().putString(PrefKeyUtils.STORE_USER_NAME, userName)
+                .putString(PrefKeyUtils.STORE_USER_PASSWORD, password)
                 .apply();
     }
 
     public User getAdminUserDetails() {
-        return new User(sharedPreferences.getString(PrefKeys.ADMIN_USER_NAME, ""),
-                sharedPreferences.getString(PrefKeys.ADMIN_USER_PASSWORD, ""));
+        return new User(sharedPreferences.getString(PrefKeyUtils.ADMIN_USER_NAME, ""),
+                sharedPreferences.getString(PrefKeyUtils.ADMIN_USER_PASSWORD, ""));
     }
 
     public User getStoreUserDetails() {
-        return new User(sharedPreferences.getString(PrefKeys.STORE_USER_NAME, ""),
-                sharedPreferences.getString(PrefKeys.STORE_USER_PASSWORD, ""));
+        return new User(sharedPreferences.getString(PrefKeyUtils.STORE_USER_NAME, ""),
+                sharedPreferences.getString(PrefKeyUtils.STORE_USER_PASSWORD, ""));
     }
 
     public String getLoggedInUserName() {
-        return sharedPreferences.getString(PrefKeys.LOGGED_IN_USER, "");
+        return sharedPreferences.getString(PrefKeyUtils.LOGGED_IN_USER, "");
     }
 
     public Users getLoggedInUser() {
@@ -108,7 +108,7 @@ public abstract class CommonAppPreferences {
     }
 
     public void setLoggedInUser(String username) {
-        sharedPreferences.edit().putString(PrefKeys.LOGGED_IN_USER, username).apply();
+        sharedPreferences.edit().putString(PrefKeyUtils.LOGGED_IN_USER, username).apply();
     }
 
     public boolean isAdmin() {
@@ -116,7 +116,7 @@ public abstract class CommonAppPreferences {
     }
 
     public void removeUsername() {
-        sharedPreferences.edit().remove(PrefKeys.LOGGED_IN_USER).apply();
+        sharedPreferences.edit().remove(PrefKeyUtils.LOGGED_IN_USER).apply();
     }
 
     public void disablePullJobs() {
@@ -124,19 +124,19 @@ public abstract class CommonAppPreferences {
     }
 
     public void disablePushJobs() {
-        sharedPreferences.edit().putBoolean(PrefKeys.ARE_PUSH_JOBS_ENABLED, false).apply();
+        sharedPreferences.edit().putBoolean(ARE_PUSH_JOBS_ENABLED, false).apply();
     }
 
     public void enablePullJobs() {
-        sharedPreferences.edit().putBoolean(PrefKeys.ARE_PULL_JOBS_ENABLED, true).apply();
+        sharedPreferences.edit().putBoolean(ARE_PULL_JOBS_ENABLED, true).apply();
     }
 
     public void enablePushJobs() {
-        sharedPreferences.edit().putBoolean(PrefKeys.ARE_PUSH_JOBS_ENABLED, true).apply();
+        sharedPreferences.edit().putBoolean(ARE_PUSH_JOBS_ENABLED, true).apply();
     }
 
     public String getStoreInsegna() {
-        return sharedPreferences.getString(PrefKeys.STORE_INSEGNA, null);
+        return sharedPreferences.getString(STORE_INSEGNA, null);
     }
 
     public void markStepAsCompleted(ConfigurationStepName step) {
@@ -148,11 +148,11 @@ public abstract class CommonAppPreferences {
     }
 
     public void setAppAutoconfigured() {
-        sharedPreferences.edit().putBoolean(PrefKeys.APP_AUTOCONFIGURED, true).apply();
+        sharedPreferences.edit().putBoolean(PrefKeyUtils.APP_AUTOCONFIGURED, true).apply();
     }
 
     public boolean isAppAutoconfigured() {
-        return sharedPreferences.getBoolean(PrefKeys.APP_AUTOCONFIGURED, false);
+        return sharedPreferences.getBoolean(PrefKeyUtils.APP_AUTOCONFIGURED, false);
     }
 
     public void loadServerSettings(HashMap<String, String> serverSettings) {
@@ -171,10 +171,10 @@ public abstract class CommonAppPreferences {
 
     public abstract boolean shouldIgnoreProfile();
 
-    public static final class PrefKeys {
+    public static final class PrefKeyUtils {
         public static final String APP_AUTOCONFIGURED = "isAppAutoconfigured";
-        private static final String STORE_USER_NAME = "storeUserName";
-        private static final String STORE_USER_PASSWORD = "storeUserPassword";
+        public static final String STORE_USER_NAME = "storeUserName";
+        public static final String STORE_USER_PASSWORD = "storeUserPassword";
         public static final String ADMIN_USER_NAME = "adminUserName";
         public static final String ADMIN_USER_PASSWORD = "adminUserPassword";
         public static final String LOGGED_IN_USER = "loggedInUser";
@@ -182,9 +182,9 @@ public abstract class CommonAppPreferences {
         public static final String ENABLED_STORES_NUMBER = "enabled_stores_number";
         public static final String STORE_ID_KEY = "storeIdPref";
         public static final String STORE_INSEGNA = "insegna";
-        private static final String DESIRED_VERSION_ID = "desiredVersionId";
-        private static final String CURRENT_VERSION_ID = "currentVersionId";
-        private static final String CURRENT_VERSION_TYPE = "currentVersionType";
+        public static final String DESIRED_VERSION_ID = "desiredVersionId";
+        public static final String CURRENT_VERSION_ID = "currentVersionId";
+        public static final String CURRENT_VERSION_TYPE = "currentVersionType";
         public static final String SHOULD_IGNORE_PROFILE = "shouldIgnoreProfile";
         public static final String ARE_PULL_JOBS_ENABLED = "arePullJobsEnabled";
         public static final String ARE_PUSH_JOBS_ENABLED = "arePushJobsEnabled";
