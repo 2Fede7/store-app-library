@@ -24,6 +24,8 @@ public final class AppConstants {
     public static final int MASK_VALUE_FOR_ARTICLE_ID = 20000000;
     public static final char PREFIX_CHAR_OF_VALID_BARCODE = '2';
 
+    public static final int SOCKET_TAG = 10000;
+
     public static final class IconTexts {
         public static final String STOCKED = "ST";
         public static final String XD = "XD";
