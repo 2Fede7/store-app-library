@@ -2,6 +2,7 @@ package it.gruppopam.app_common.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import it.gruppopam.app_common.model.PlainISODateDeserializer;
@@ -33,5 +34,19 @@ public class PromotionDto {
     private Boolean isInFlyer;
 
     private String flyerCode;
+
+    private BigDecimal price;
+
+    private BigDecimal discountPercentage;
+
+    private Long soldPieces;
+
+    private Long paidPieces;
+
+    private Boolean isFidelity;
+
+    private BigDecimal fidelityDiscountPercentage;
+
+    private BigDecimal fidelityPrice;
 
 }

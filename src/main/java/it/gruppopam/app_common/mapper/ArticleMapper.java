@@ -1,7 +1,11 @@
 package it.gruppopam.app_common.mapper;
 
+import static com.annimon.stream.Collectors.toList;
+import static it.gruppopam.app_common.utils.CollectionUtils.isEmpty;
+
 import com.annimon.stream.Stream;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,9 +20,6 @@ import it.gruppopam.app_common.model.entity.ArticleSupplierLine;
 import it.gruppopam.app_common.model.entity.Promotion;
 import it.gruppopam.app_common.model.entity.SubstituteArticle;
 import it.gruppopam.app_common.model.relations.ArticleWithRelations;
-
-import static com.annimon.stream.Collectors.toList;
-import static it.gruppopam.app_common.utils.CollectionUtils.isEmpty;
 
 public class ArticleMapper implements BaseMapper<ArticleDto, ArticleWithRelations> {
 
@@ -112,7 +113,21 @@ public class ArticleMapper implements BaseMapper<ArticleDto, ArticleWithRelation
         promotion.setPromoYear(promotionDto.getPromoYear());
         promotion.setPromoType(promotionDto.getPromoType());
         promotion.setStartDate(promotionDto.getStartDate());
+        promotion.setPrice(safeGetDouble(promotionDto.getPrice()));
+        promotion.setDiscountPercentage(safeGetDouble(promotionDto.getDiscountPercentage()));
+        promotion.setSoldPieces(promotionDto.getSoldPieces());
+        promotion.setPaidPieces(promotionDto.getPaidPieces());
+        promotion.setIsFidelity(promotionDto.getIsFidelity());
+        promotion.setFidelityDiscountPercentage(safeGetDouble(promotionDto.getFidelityDiscountPercentage()));
+        promotion.setFidelityPrice(safeGetDouble(promotionDto.getFidelityPrice()));
         return promotion;
+    }
+
+    private Double safeGetDouble(BigDecimal price) {
+        if (price == null) {
+            return null;
+        }
+        return price.doubleValue();
     }
 
     private ArticleOrderBlock mapToModel(ArticleOrderBlockDto articleOrderBlockDto, Long articleId) {
