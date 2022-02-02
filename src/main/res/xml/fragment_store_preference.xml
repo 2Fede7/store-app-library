@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Store Settings">
+       <it.gruppopam.store_replenishment.utils.ui.NonEmptyEditTextPreference
+            fontPath="fonts/RobotoCondensed-Bold.ttf"
+            android:key="storeIdPref"
+            android:title="@string/store_id"
+            android:name="store_id"
+            android:inputType="number"
+            android:maxLines="1" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

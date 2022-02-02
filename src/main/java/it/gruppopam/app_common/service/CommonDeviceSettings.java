@@ -1,9 +1,5 @@
 package it.gruppopam.app_common.service;
 
-import static it.gruppopam.app_common.events.SettingsFetchCompleteEvent.Result.COMPLETED;
-import static it.gruppopam.app_common.events.SettingsFetchCompleteEvent.Result.FAILED;
-import static it.gruppopam.app_common.utils.AppConstants.SOCKET_TAG;
-
 import android.content.Context;
 import android.net.TrafficStats;
 import android.os.StrictMode;
@@ -14,6 +10,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.HashMap;
 
 import it.gruppopam.app_common.events.SettingsFetchCompleteEvent;
+import it.gruppopam.app_common.events.SettingsFetchFailedEvent;
 import it.gruppopam.app_common.exceptions.RetrieveDeviceSettingException;
 import it.gruppopam.app_common.network.api.DeviceAppManagerApi;
 import it.gruppopam.app_common.utils.CommonAppPreferences;
@@ -23,6 +20,8 @@ import lombok.SneakyThrows;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static it.gruppopam.app_common.utils.AppConstants.SOCKET_TAG;
 
 @NoArgsConstructor
 public abstract class CommonDeviceSettings {
@@ -79,7 +78,7 @@ public abstract class CommonDeviceSettings {
                 if (response.isSuccessful()) {
                     appPreferences.loadServerSettings(response.body());
                     if (areFetchedSettingsValid()) {
-                        EventBus.getDefault().post(new SettingsFetchCompleteEvent(COMPLETED));
+                        EventBus.getDefault().post(new SettingsFetchCompleteEvent());
                     }
                 } else {
                     handleFailure(DEVICE_SETTINGS_FETCH_FAILED + " - Status : " + response.code(), null);
@@ -92,21 +91,27 @@ public abstract class CommonDeviceSettings {
             }
 
             void handleFailure(String message, Throwable t) {
-                if (areFetchedSettingsValid()) {
-                    EventBus.getDefault().post(new SettingsFetchCompleteEvent(FAILED));
-                } else {
-                    Toast.makeText(
-                            context,
-                            DEVICE_SETTINGS_FETCH_FAILED,
-                            Toast.LENGTH_SHORT
-                    ).show();
-                    ExceptionLogger.logError(TAG, message, t);
-                }
+                Toast.makeText(
+                        context,
+                        DEVICE_SETTINGS_FETCH_FAILED,
+                        Toast.LENGTH_SHORT
+                ).show();
+                ExceptionLogger.logError(TAG, message, t);
+                EventBus.getDefault().post(new SettingsFetchFailedEvent());
+
             }
         };
     }
 
-    public abstract boolean areFetchedSettingsValid();
+    public boolean isProperStoreIdSet() {
+        return appPreferences.isStoreIdPresent();
+    }
+
+    public boolean areFetchedSettingsValid() {
+        return areUrlsValid() && areStoreCountersValid();
+    }
+
+    public abstract boolean areUrlsValid();
 
     public boolean areStoreCountersValid() {
         return !(getStoreOrdinalNumber() == null || getEnabledStoresNumber() == null);

@@ -72,4 +72,6 @@
     <string name="wait_for_configuration_completion">Attendi il completamento della configurazione automatica</string>
     <string name="wait_for_configuration_completion_or">oppure</string>
     <string name="manual_configuration">Procedi con la configurazione manuale</string>
+
+    <string name="store_id">Id negozio</string>
 </resources>

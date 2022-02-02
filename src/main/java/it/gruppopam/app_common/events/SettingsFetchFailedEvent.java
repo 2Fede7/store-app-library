@@ -1,4 +1,4 @@
 package it.gruppopam.app_common.events;
 
-public class SettingsFetchCompleteEvent {
+public class SettingsFetchFailedEvent {
 }

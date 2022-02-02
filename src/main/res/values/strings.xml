@@ -73,4 +73,5 @@
     <string name="wait_for_configuration_completion_or">or</string>
     <string name="manual_configuration">Continue with manual configuration</string>
 
+    <string name="store_id">Store id</string>
 </resources>
