@@ -15,6 +15,7 @@ import org.greenrobot.eventbus.Subscribe;
 import javax.inject.Inject;
 
 import it.gruppopam.app_common.R;
+import it.gruppopam.app_common.events.ManualConfigurationCompletedEvent;
 import it.gruppopam.app_common.events.NetworkChangeEvent;
 import it.gruppopam.app_common.events.SettingsFetchCompleteEvent;
 import it.gruppopam.app_common.events.SettingsFetchFailedEvent;
@@ -97,7 +98,7 @@ public class StorePreferenceFragment extends PreferenceFragmentCompat implements
     @Subscribe
     public void onSettingsFetchComplete(SettingsFetchCompleteEvent event) {
         dataSync.pullAllData();
-        getActivity().finish();
+        eventBus.post(new ManualConfigurationCompletedEvent());
     }
 
     @Subscribe

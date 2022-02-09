@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory android:title="Store Settings">
-       <it.gruppopam.store_replenishment.utils.ui.NonEmptyEditTextPreference
+       <it.gruppopam.app_common.preferences.NonEmptyEditTextPreference
             fontPath="fonts/RobotoCondensed-Bold.ttf"
             android:key="storeIdPref"
             android:title="@string/store_id"
