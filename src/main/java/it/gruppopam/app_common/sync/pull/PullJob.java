@@ -7,23 +7,9 @@ import retrofit2.Response;
 
 public abstract class PullJob extends BaseJob {
 
-    protected Long storeId;
-
-    //private SharedPreferenceUtil sharedPreferenceUtil;
-
     public PullJob(boolean enablePaging, Params params) {
         super(params);
         setEnablePaging(enablePaging);
-    }
-
-    public PullJob(boolean enablePaging, Params params, Long storeId) {
-        super(params);
-        setEnablePaging(enablePaging);
-        this.storeId = storeId;
-    }
-
-    public void initialize(Long storeId) {
-        this.storeId = storeId;
     }
 
     @Override
