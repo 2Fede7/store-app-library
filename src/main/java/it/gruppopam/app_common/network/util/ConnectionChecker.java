@@ -6,16 +6,24 @@ import android.net.NetworkInfo;
 
 import javax.inject.Inject;
 
-public class NetworkUtil {
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class ConnectionChecker {
+    private final Context context;
+    private boolean servicesReachable = true;
+
 
     @Inject
-    public NetworkUtil() {
+    public ConnectionChecker(Context context) {
+            this.context = context;
     }
 
-    public Boolean isConnectedToNetwork(Context context) {
+    public Boolean isConnectedToNetwork() {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-
 }
