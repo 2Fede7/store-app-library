@@ -4,8 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
 
 import it.gruppopam.app_common.network.api.DeviceAppManagerApi;
@@ -80,7 +78,6 @@ public abstract class CheckForUpdateAsyncTask extends AsyncTask<Void, String, Ch
         }
     }
 
-    @NotNull
     private VersionCheck getVersionIsCorrect(Response<ResponseBody> response) {
         int versionId = Integer.parseInt(response.raw().headers().get(DESIRED_VERSION_ID));
         String versionType = response.raw().headers().get(DESIRED_VERSION_TYPE);
