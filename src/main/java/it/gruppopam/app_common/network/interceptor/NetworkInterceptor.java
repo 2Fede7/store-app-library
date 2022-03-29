@@ -12,7 +12,6 @@ import java.net.SocketTimeoutException;
 
 import it.gruppopam.app_common.exceptions.ServiceConnectionException;
 import it.gruppopam.app_common.network.util.ConnectionChecker;
-
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -65,20 +64,20 @@ public class NetworkInterceptor implements Interceptor {
     }
 
     private void markServiceReachable(Request request) {
-        if (isSrsRequest(request)) {
+        if (isSrsOrSusRequest(request)) {
             connectionChecker.markServicesReachable();
         }
     }
 
     private void markServiceUnreachable(Request request) {
-        if (isSrsRequest(request)) {
+        if (isSrsOrSusRequest(request)) {
             connectionChecker.markServicesUnreachable();
         }
     }
 
-    private boolean isSrsRequest(Request request) {
+    private boolean isSrsOrSusRequest(Request request) {
         return !isEmpty(serviceUrl) &&
-            request.url().toString().contains(serviceUrl);
+                request.url().toString().contains(serviceUrl);
     }
 
 }
