@@ -64,18 +64,18 @@ public class NetworkInterceptor implements Interceptor {
     }
 
     private void markServiceReachable(Request request) {
-        if (isSrsOrSusRequest(request)) {
+        if (isTrackedServiceRequest(request)) {
             connectionChecker.markServicesReachable();
         }
     }
 
     private void markServiceUnreachable(Request request) {
-        if (isSrsOrSusRequest(request)) {
+        if (isTrackedServiceRequest(request)) {
             connectionChecker.markServicesUnreachable();
         }
     }
 
-    private boolean isSrsOrSusRequest(Request request) {
+    private boolean isTrackedServiceRequest(Request request) {
         return !isEmpty(serviceUrl) &&
                 request.url().toString().contains(serviceUrl);
     }

@@ -19,12 +19,10 @@ import java.util.concurrent.TimeUnit;
 import it.gruppopam.app_common.exceptions.ServiceConnectionException;
 import it.gruppopam.app_common.network.util.ConnectionChecker;
 import it.gruppopam.app_common.network.utils.CustomNetworkSecurityPolicy;
-import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 
 @RunWith(RobolectricTestRunner.class)
