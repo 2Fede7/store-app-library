@@ -10,10 +10,12 @@ import javax.inject.Inject;
 
 import it.gruppopam.app_common.events.ServiceReachabilityEvent;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public class ConnectionChecker {
-    private final int MAX_CONSECUTIVE_FAILURES = 5;
+    @Setter
+    private int maxConsecutiveFailures = 5;
     private final Context context;
     private final EventBus eventBus;
     private boolean servicesReachable = true;
@@ -43,7 +45,7 @@ public class ConnectionChecker {
     }
 
     public void markServicesUnreachable() {
-        if (++consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
+        if (++consecutiveFailures >= maxConsecutiveFailures) {
             servicesReachable = false;
             postReachabilityEvent(connectedToNetwork, servicesReachable);
         }
