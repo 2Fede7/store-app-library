@@ -27,7 +27,7 @@ public final class AppConstants {
     public static final int SOCKET_TAG = 10000;
 
     public static final class IconTexts {
-        public static final String STOCKED = "ST";
+        public static final String STOCKED = "C";
         public static final String XD = "XD";
         public static final String DIRECT = "DIR";
     }
