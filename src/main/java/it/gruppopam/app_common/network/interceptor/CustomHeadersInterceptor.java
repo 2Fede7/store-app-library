@@ -26,9 +26,9 @@ public class CustomHeadersInterceptor extends BaseHeadersInterceptor {
 
     public CustomHeadersInterceptor(Context applicationContext, String username,
                                     Long storeId, String versionId, String versionType,
-                                    boolean disableUpdateChecker) {
+                                    boolean disableUpdateChecker, String appName) {
         super(applicationContext,
-                CLIENT_HEADER_VAL);
+                appName);
         this.username = username;
         this.storeId = storeId;
         this.versionId = versionId;

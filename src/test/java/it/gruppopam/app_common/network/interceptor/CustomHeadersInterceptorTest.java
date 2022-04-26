@@ -60,7 +60,8 @@ public class CustomHeadersInterceptorTest {
         storeId = 250L;
         Settings.Secure.putString(RuntimeEnvironment.application.getContentResolver(), Settings.Secure.ANDROID_ID, testDeviceId);
         client = new OkHttpClient.Builder()
-                .addInterceptor(new CustomHeadersInterceptor(applicationContext, username, storeId, versionId, versionType, disableUpdateChecker))
+                .addInterceptor(new CustomHeadersInterceptor(applicationContext, username, storeId, versionId, versionType,
+                        disableUpdateChecker, "store_replenishment_app"))
                 .build();
     }
 
