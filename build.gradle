@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 group = 'it.gruppopam.android'
-version = '1.2.7'
+version = '1.2.8'
 description = 'Android library for store apps'
 
 buildscript {
@@ -62,8 +62,8 @@ android {
         minSdkVersion 21
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode 128
+        versionName "${version}"
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         testInstrumentationRunnerArguments clearPackageData: 'true'
