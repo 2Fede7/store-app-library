@@ -26,6 +26,10 @@ public final class AppConstants {
 
     public static final int SOCKET_TAG = 10000;
 
+    public static final String STORE_ID = "store_id";
+    public static final String DEVICE_ID = "device_id";
+    public static final String DEVICE_IP = "device_ip";
+
     public static final class IconTexts {
         public static final String STOCKED = "C";
         public static final String XD = "XD";

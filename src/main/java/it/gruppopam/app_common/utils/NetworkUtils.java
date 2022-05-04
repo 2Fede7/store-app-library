@@ -1,5 +1,11 @@
 package it.gruppopam.app_common.utils;
 
+import static android.content.Context.WIFI_SERVICE;
+
+import android.content.Context;
+import android.net.wifi.WifiManager;
+import android.text.format.Formatter;
+
 import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
@@ -35,5 +41,10 @@ public class NetworkUtils {
             return NULL_MAC_ADDRESS;
         }
         return NULL_MAC_ADDRESS;
+    }
+
+    public static String getIpAddress(Context context) {
+        WifiManager wm = (WifiManager) context.getApplicationContext().getSystemService(WIFI_SERVICE);
+        return Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
     }
 }
