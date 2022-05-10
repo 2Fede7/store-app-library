@@ -1,10 +1,13 @@
 package it.gruppopam.app_common.network.api.util;
 
+import androidx.annotation.NonNull;
+
 import com.annimon.stream.Stream;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.ConnectionPool;
 import okhttp3.Dispatcher;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -21,9 +24,15 @@ public final class LongTimeoutHttpClientBuilder {
                 .dispatcher(dispatcher)
                 .readTimeout(2, TimeUnit.MINUTES)
                 .writeTimeout(2, TimeUnit.MINUTES)
-                .connectTimeout(10, TimeUnit.SECONDS);
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .connectionPool(buildConnectionPool());
         addAllInterceptors(interceptors, builder);
         return builder.build();
+    }
+
+    @NonNull
+    private static ConnectionPool buildConnectionPool() {
+        return new ConnectionPool(10, 2, TimeUnit.MINUTES);
     }
 
     private static void addAllInterceptors(List<Interceptor> interceptors, OkHttpClient.Builder builder) {
