@@ -1,9 +1,13 @@
 package it.gruppopam.app_common.alarms;
 
+import org.joda.time.Duration;
+
 import javax.inject.Inject;
 
+import it.gruppopam.app_common.utils.DayOfWeek;
+
 public abstract class BaseAlarmFiringBasedOnStoreCounters implements AlarmFiringStrategy {
-    public static final int MIN_SPREAD_IN_MINUTES = 30;
+    public static final Duration MIN_SPREAD_IN_MINUTES = Duration.standardMinutes(30);
 
     protected final AlarmFiringDefault defaultAlarmFiring = new AlarmFiringDefault();
     protected final AlarmFiringBasedOnStoreId alarmFiringBasedOnStore;
@@ -14,17 +18,17 @@ public abstract class BaseAlarmFiringBasedOnStoreCounters implements AlarmFiring
     }
 
     @Override
-    public synchronized Long calculateStartDateTimeInMillis(int syncHour, int syncMinutes, long repeatIntervalInMillis, boolean delayed) {
-        return calculateStartDateTimeInMillis(syncHour, syncMinutes, repeatIntervalInMillis, delayed, MIN_SPREAD_IN_MINUTES);
+    public synchronized Long calculateStartDateTimeInMillis(DayOfWeek dayOfWeek, int syncHour, int syncMinutes, boolean delayed, Duration repeatInterval) {
+        return calculateStartDateTimeInMillis(dayOfWeek, syncHour, syncMinutes, delayed, repeatInterval, MIN_SPREAD_IN_MINUTES);
     }
 
-    public long computeDelayInMillis(Integer spreadInMinutes, Integer storeOrdinalNumber, Integer enabledStoresNumber) {
-        int validSpreadInMinutes = computeValidSpreadInMinutes(spreadInMinutes);
-        return (validSpreadInMinutes * 60 * 1000) * storeOrdinalNumber / (enabledStoresNumber - 1);
+    public long computeDelayInMillis(Duration spread, Integer storeOrdinalNumber, Integer enabledStoresNumber) {
+        long validSpreadInMillis = computeValidSpreadInMillis(spread);
+        return validSpreadInMillis * storeOrdinalNumber / (enabledStoresNumber - 1);
     }
 
-    private int computeValidSpreadInMinutes(Integer spreadInMinutes) {
-        return spreadInMinutes == null ? MIN_SPREAD_IN_MINUTES : Math.max(spreadInMinutes, MIN_SPREAD_IN_MINUTES);
+    private long computeValidSpreadInMillis(Duration spread) {
+        return spread == null ? MIN_SPREAD_IN_MINUTES.getMillis() : Math.max(spread.getMillis(), MIN_SPREAD_IN_MINUTES.getMillis());
     }
 
 }

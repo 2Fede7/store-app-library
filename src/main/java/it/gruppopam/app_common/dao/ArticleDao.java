@@ -1,5 +1,6 @@
 package it.gruppopam.app_common.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -54,6 +55,10 @@ public interface ArticleDao extends IDao<Article> {
     @Transaction
     @RawQuery
     List<ArticleWithRelations> selectWrapperList(SupportSQLiteQuery query);
+
+    @Transaction
+    @RawQuery
+    LiveData<List<ArticleWithRelations>> selectLiveDataList(SupportSQLiteQuery query);
 
     @Transaction
     @Query(SELECT_ALL_QUERY)
