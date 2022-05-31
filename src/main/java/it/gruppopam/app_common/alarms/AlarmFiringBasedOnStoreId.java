@@ -1,6 +1,10 @@
 package it.gruppopam.app_common.alarms;
 
+import org.joda.time.Duration;
+
 import javax.inject.Inject;
+
+import it.gruppopam.app_common.utils.DayOfWeek;
 
 public class AlarmFiringBasedOnStoreId implements AlarmFiringStrategy {
 
@@ -14,9 +18,8 @@ public class AlarmFiringBasedOnStoreId implements AlarmFiringStrategy {
         this.storeId = storeId;
     }
 
-    @Override
-    public synchronized Long calculateStartDateTimeInMillis(int syncHour, int syncMinutes, long repeatIntervalInMillis, boolean delayed) {
-        long startTime = defaultAlarmFiring.calculateStartDateTimeInMillis(syncHour, syncMinutes, repeatIntervalInMillis);
+    public synchronized Long calculateStartDateTimeInMillis(DayOfWeek dayOfWeek, int syncHour, int syncMinutes, boolean delayed, Duration repeatInterval) {
+        long startTime = defaultAlarmFiring.calculateStartDateTimeInMillis(dayOfWeek, syncHour, syncMinutes, repeatInterval);
 
         if (delayed) {
             startTime += computeDelayInMillis();
@@ -26,7 +29,7 @@ public class AlarmFiringBasedOnStoreId implements AlarmFiringStrategy {
     }
 
     @Override
-    public Long calculateStartDateTimeInMillis(int syncHour, int syncMinutes, long repeatIntervalInMillis, boolean delayed, Integer spreadInMinutes) {
+    public Long calculateStartDateTimeInMillis(DayOfWeek dayOfWeek, int syncHour, int syncMinutes, boolean delayed, Duration repeatInterval, Duration spread) {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 

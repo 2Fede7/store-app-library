@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 group = 'it.gruppopam.android'
-version = '1.2.10'
+version = '1.2.12'
 description = 'Android library for store apps'
 
 buildscript {
@@ -34,17 +34,17 @@ allprojects {
     }
 }
 
-def libraryVersionAlreadyExistes = true;
+def libraryVersionAlreadyExistes = true
 
 task resolveCompileSources {
     doLast {
         try {
             configurations.getByName("generic").incoming.resolutionResult.allDependencies.collect { it.selected.id }
 
-            libraryVersionAlreadyExistes = true;
+            libraryVersionAlreadyExistes = true
             println "Library version already exists!"
         } catch (Exception e) {
-            libraryVersionAlreadyExistes = false;
+            libraryVersionAlreadyExistes = false
             println "Library not exists"
         }
     }
@@ -134,18 +134,21 @@ android {
             publish {
                 contextUrl = System.getenv("ARTIFACTORY_URL")
                 repository {
-                    repoKey = System.getenv("MAVEN_REPO_KEY") //The Artifactory repository key to publish to
+                    repoKey = System.getenv("MAVEN_REPO_KEY")
+                    //The Artifactory repository key to publish to
 
                     username = System.getenv("ARTIFACTORY_USER")          //The publisher user name
                     password = System.getenv("ARTIFACTORY_PASS")
                 }
 
                 defaults {
-                    publications ('aar')
+                    publications('aar')
                     publishBuildInfo = true   //Publish build-info to Artifactory (true by default)
                     publishArtifacts = true   //Publish artifacts to Artifactory (true by default)
-                    publishPom = true   //Publish generated POM files to Artifactory (true by default).
-                    publishIvy = true   //Publish generated Ivy descriptor files to Artifactory (true by default).
+                    publishPom = true
+                    //Publish generated POM files to Artifactory (true by default).
+                    publishIvy = true
+                    //Publish generated Ivy descriptor files to Artifactory (true by default).
                 }
             }
         }
