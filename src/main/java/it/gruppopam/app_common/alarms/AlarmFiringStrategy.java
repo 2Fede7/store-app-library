@@ -1,7 +1,12 @@
 package it.gruppopam.app_common.alarms;
 
-public interface AlarmFiringStrategy {
-    Long calculateStartDateTimeInMillis(int syncHour, int syncMinutes, long repeatIntervalInMillis, boolean delayed);
+import org.joda.time.Duration;
 
-    Long calculateStartDateTimeInMillis(int syncHour, int syncMinutes, long repeatIntervalInMillis, boolean delayed, Integer spreadInMinutes);
+import it.gruppopam.app_common.utils.DayOfWeek;
+
+public interface AlarmFiringStrategy {
+    Long calculateStartDateTimeInMillis(DayOfWeek dayOfWeek, int syncHour, int syncMinutes, boolean delayed, Duration repeatInterval);
+
+    Long calculateStartDateTimeInMillis(DayOfWeek dayOfWeek, int syncHour, int syncMinutes, boolean delayed, Duration repeatInterval, Duration spread);
+
 }
