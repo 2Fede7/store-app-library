@@ -34,7 +34,7 @@ public class AlarmFiringDefault {
         int daysBetween = getDaysBetween(dayOfWeek);
         Calendar timeOff = DateTime.now().toCalendar(Locale.getDefault());
         timeOff.add(Calendar.DATE, daysBetween);
-        timeOff.set(Calendar.HOUR, syncHour);
+        timeOff.set(Calendar.HOUR_OF_DAY, syncHour);
         timeOff.set(Calendar.MINUTE, syncMinutes);
         timeOff.set(Calendar.SECOND, 0);
         return timeOff;
