@@ -28,6 +28,8 @@ import static it.gruppopam.app_common.utils.CollectionUtils.isEmpty;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 
+import androidx.lifecycle.LiveData;
+
 @SuppressWarnings("ALL")
 public class ArticleRepository extends BaseRepository<Article> implements Persistable<ArticleWithRelations> {
     private ArticleDao articleDao;
@@ -137,6 +139,12 @@ public class ArticleRepository extends BaseRepository<Article> implements Persis
     public List<ArticleWithRelations> selectWrapperListQuery(String rawQuery, Object... objects) {
         return runInTransactionWithResult(() -> {
             return articleDao.selectWrapperList(buildQuery(rawQuery, objects));
+        });
+    }
+
+    public LiveData<List<ArticleWithRelations>> selectLiveDataListQuery(String rawQuery, Object... objects) {
+        return runInTransactionWithResult(() -> {
+            return articleDao.selectLiveDataList(buildQuery(rawQuery, objects));
         });
     }
 
