@@ -155,6 +155,10 @@ public abstract class CommonAppPreferences {
         return sharedPreferences.getBoolean(PrefKeyUtils.APP_AUTOCONFIGURED, false);
     }
 
+    public Boolean areStoreCountersValid() {
+        return !(getStoreOrdinalNumber() == null || getStoreOrdinalNumber() == -1 || getEnabledStoresNumber() == null);
+    }
+
     public void loadServerSettings(HashMap<String, String> serverSettings) {
         SharedPreferences.Editor edit = sharedPreferences.edit();
         for (Map.Entry<String, String> entry : serverSettings.entrySet()) {
