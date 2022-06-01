@@ -1,18 +1,24 @@
 package it.gruppopam.app_common.alarms;
 
+import org.joda.time.Duration;
+
+import it.gruppopam.app_common.utils.DayOfWeek;
+
 public interface AlarmInfo {
 
     int getSyncHour();
 
     int getSyncMinutes();
 
-    long getRepeatIntervalInMillis();
+    Duration getRepeatInterval();
 
     boolean isDelayed();
 
-    Integer getSpreadInMinutes();
+    Duration getSpread();
 
     IJobAction getJobAction();
+
+    DayOfWeek getDayOfWeek();
 
     String name();
 

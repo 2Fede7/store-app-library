@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import org.joda.time.Duration;
 import org.joda.time.LocalDateTime;
 
 import it.gruppopam.app_common.di.module.annotation.ForApplication;
@@ -28,19 +29,23 @@ public abstract class BaseAlarmController {
 
     protected void setAlarm(Context context, AlarmInfo whichAlarm, Class classs) {
         PendingIntent pendingIntent = getPendingIntent(context, whichAlarm, classs);
+        scheduleAlarm(whichAlarm.name(), getNextStartTime(whichAlarm), whichAlarm.getRepeatInterval(), pendingIntent);
+    }
 
+    private void scheduleAlarm(String alarmName, long startTime, Duration repeatInterval, PendingIntent pendingIntent) {
         Log.i(TAG, "Starting alarm");
 
-        long startTime = alarmFiringStrategy.calculateStartDateTimeInMillis(whichAlarm.getSyncHour(), whichAlarm.getSyncMinutes(),
-            whichAlarm.getRepeatIntervalInMillis(), whichAlarm.isDelayed(), whichAlarm.getSpreadInMinutes());
-
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-            startTime,
-            whichAlarm.getRepeatIntervalInMillis(), pendingIntent);
+            startTime, repeatInterval.getMillis(), pendingIntent);
 
-        Log.i(TAG, "Alarm (" + whichAlarm + ") scheduled at "
+        Log.i(TAG, "Alarm (" + alarmName + ") scheduled at "
             + new LocalDateTime(startTime) + " and current time is "
             + new LocalDateTime(System.currentTimeMillis()));
+    }
+
+    private long getNextStartTime(AlarmInfo whichAlarm) {
+        return alarmFiringStrategy.calculateStartDateTimeInMillis(whichAlarm.getDayOfWeek(), whichAlarm.getSyncHour(), whichAlarm.getSyncMinutes(),
+                whichAlarm.isDelayed(), whichAlarm.getRepeatInterval(), whichAlarm.getSpread());
     }
 
     protected PendingIntent getPendingIntent(Context context, AlarmInfo alarm, Class classs) {
